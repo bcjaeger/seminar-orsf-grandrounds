@@ -1,0 +1,65 @@
+---
+title: "Making Machine Learning Fast and Interpretable"
+subtitle: "Methods and Application to the Prediction of Incident Heart Failure"
+author: "Byron C. Jaeger"
+date: "PHS Grand Rounds: Sept. 8, 2022"
+format: revealjs
+editor: visual
+execute: 
+  echo: true
+---
+
+
+## Hello, my name is Byron
+
+![](img/run_R_kids.png){fig-align="center"}
+
+# Machine Learning
+
+##
+
+  
+
+## Two ways to learn {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Supervised learning**
+
+- Labeled data
+- Predict outcome
+- Clinical risk prediction
+
+:::
+
+::: {.column width="50%"}
+
+**Unsupervised learning**
+
+- Unlabeled data
+- Find structure
+- Clinical phenotyping
+
+:::
+
+::::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 0px; font-size: 3em; color: black;"}
+Supervised learning
+:::
+
+Labeled data
+
+```{r, echo=FALSE, fig.height=5, fig.align='center'} 
+
+knitr::include_graphics('img/ml-supervised-1.svg')
+
+```
+
+
+
+

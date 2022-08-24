@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Making Machine Learning Fast and Interpretable</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Byron C. Jaeger" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Making Machine Learning Fast and Interpretable
+## Methods and Application to the Prediction of Incident Heart Failure
+### Byron C. Jaeger
+### PHS Grand Rounds: Sept. 8, 2022
+
+---
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.huge { font-size: 200% }
+.large { font-size: 130% }
+.small { font-size: 70% }
+&lt;/style&gt;
+
+# Hello! My name is Byron 
+
+.left-column[
+
+I am an R enthusiast
+
+I like walking my dog and learning (easy) cocktail recipes.
+
+I study &lt;br/&gt; risk prediction using machine learning, generally cardiovascular disease.
+
+]
+
+.right-column[
+
+&lt;img src="img/run_R_kids.png" width="100%" align="right" /&gt;
+
+]
+
+---
+class: center, middle, inverse
+
+# .huge[Risk Prediction]
+
+## .huge[(why?)]
+
+---
+
+## Why predict risk?
+
+&lt;br&gt;
+
+--
+
+### Direct treatment to those most likely to benefit
+
+--
+
+### Avoid treating those who are not likely to benefit
+
+---
+class: center, middle, inverse
+
+# .huge[Machine Learning]
+
+---
+background-image: url(img/meme_chicken_ml.jpg)
+background-size: contain
+
+&lt;!-- .footnote[Source: [@kareem_carr](https://twitter.com/kareem_carr/status/1374760100079017984/photo/1) - Link goes to tweet] --&gt;
+
+---
+
+## Two ways to learn
+
+.pull-left[
+
+### Supervised
+
+.large[Labeled data]
+
+.large[Predict an outcome]
+
+.large[Learners]
+
+.large[Risk prediction]
+
+]
+
+.pull-right[
+
+### Unsupervised
+
+.large[Unlabeled data]
+
+.large[Find structure]
+
+.large[Clusters]
+
+.large[Organize medical records]
+
+]
+
+---
+
+## But for now...
+
+.pull-left[
+
+### Supervised
+
+.large[Labeled data]
+
+.large[Predict an outcome]
+
+.large[Learners]
+
+.large[Risk prediction]
+
+]
+
+---
+class: center, middle
+
+# Labeled data
+
+---
+layout: true
+## Labeled data
+
+---
+
+&lt;img src="img/ml-supervised-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="img/ml-supervised-1-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-1-2.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-1-3.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-2.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-3.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-4.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-5.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-8.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+layout: false
+class: center, middle
+
+# Predict an outcome
+
+---
+layout: true
+
+## Predict an outcome
+
+---
+
+&lt;img src="img/ml-supervised-6.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-7.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-7-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/ml-supervised-7-2.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+layout: false
+class: center, middle, inverse
+
+# .huge[Learners]
+
+--
+
+## .huge[(jargon)]
+
+---
+
+## Learners
+
+
+.large[A *learner* is like a recipe for a prediction model]
+
+--
+
+- .large[A learner is not the same thing as a prediction model]
+
+- .large[A recipe is not the same thing as the food!]
+
+---
+
+## What is a good learner for these data?
+
+&lt;img src="index_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 1: find the line of best fit
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 1: find the line of best fit
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 2: find the curve of best fit
+
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 2: find the curve of best fit
+
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 3: connect the dots
+
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Learner 3: connect the dots
+
+&lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;iframe src="https://app.sli.do/event/skz3VjibsGSTe3YyF7D68v" height="90%" width="100%" frameBorder="0" style="min-height: 560px;" title="Which model?"&gt;&lt;/iframe&gt;
+
+---
+
+&lt;img src="img/ml_abstraction.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+.footnote[Basic steps of ML. Source: [mlr3book](https://mlr3book.mlr-org.com/basics.html)]
+
+---
+class: inverse, center, middle
+
+# Random Forests
+
+---
+background-image: url(img/penguins.png)
+background-size: 45%
+background-position: 85% 72.5%
+
+## Decision trees
+
+- Frequently used in supervised learning.
+
+- Partitions the space of predictor variables.
+
+- Can be used for classification, regression, and survival analysis. 
+
+.pull-left[
+We'll demonstrate the mechanics of decision trees by developing a prediction rule to classify penguin&lt;sup&gt;1&lt;/sup&gt; species (chinstrap, gentoo, or adelie) based on bill and flipper length.
+]
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt;Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station](https://pal.lternet.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/).
+]
+
+---
+
+Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station
+
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+Partition all the penguins into flipper length &lt; 207 or ≥ 207 mm
+
+&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+Partition penguins on the left side into into bill length &lt; 43 or ≥ 43 mm
+
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+The same partitions, visualized as a binary tree.
+
+&lt;img src="img/rpart_plot_classif.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+Node text, top to bottom: predicted class type; predicted class probability; % of data in node;
+
+---
+
+## Forest = lots of trees
+
+.large[Random forests are large sets of de-correlated decision trees (random-ness helps de-correlate)]
+
+--
+
+.large[Predictions from random forests are just the average prediction from each tree.]
+
+---
+class: inverse, center, middle
+
+# Oblique random survival forest (ORSF)
+
+--
+
+## (Not as complicated as it sounds)
+
+---
+
+Remember when we grew a decision tree by partitioning the penguin data?
+
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+With oblique splits, partitions do not need to be rectangles
+
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+A decision tree's predictions are the average of the observations in each leaf
+
+&lt;img src="img/rpart_plot_classif.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+With survival trees, the 'average of the observations' is a survival curve.
+
+&lt;img src="img/rpart_plot_surv.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.footnote[the survival outcomes are simulated]
+
+---
+class: center, middle
+
+# .huge[Learners]
+
+---
+
+## Learners for censored outcomes
+
+Cox proportional hazards model 
+
+- Forward / backward selection
+- Regularization
+
+--
+
+Random forests
+
+- Conditional inference
+- Axis based &amp; oblique
+
+--
+
+Boosting
+
+- Boosted models
+- Boosted decision trees
+
+--
+
+Neural networks
+
+- Coxnet
+- Deepsurv
+
+---
+
+## Software for the learners
+
+
+
+
+
+---
+
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+# .huge[BONUS ROUND]
+
+---
+
+## 2017 ACC/AHA High ASCVD risk
+
+__Definition__: clinical CVD or __predicted 10-year ASCVD risk ≥ 10%__
+
+As a matter of practical convenience, adults with stage 1 hypertension and 
+
+- diabetes mellitus, 
+
+- CKD (chronic kidney disease), or 
+
+- ≥ 65 years of age 
+
+are considered to have high ASCVD risk by the guideline. 
+
+This recommendation was based on the assumption that most adults with diabetes, CKD, or ≥ 65 years of age are likely to have a 10-year predicted ASCVD risk ≥ 10% and data from surveys suggesting most clinicians, including cardiologists, do not assess ASCVD risk using recommended risk prediction tools.
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt;See Sections 9.3, 9.6, and 10.3 of  [the guideline](https://www.ahajournals.org/doi/pdf/10.1161/HYP.0000000000000065)
+]
+
+---
+
+## Pooled cohort risk equations
+
+Predict 10-year risk for a first atherosclerotic cardiovascular disease (ASCVD) event.
+
+The American College of Cardiology and American Heart Association (ACC/AHA) recommend using these equations to guide clinical decisions related to the management and treatment of stage 1 hypertension.
+
+--
+
+- Nonpharmalogical therapy for all adults with stage 1 hypertension
+
+- For adults with stage 1 hypertension **and high CVD risk**, nonpharmalogical therapy **and** initiation or intensification of antihypertensive medication
+
+- High CVD risk = clinical CVD or predicted 10-year ASCVD risk ≥ 10%
+
+--
+
+Does this recommendation help direct antihypertensive medication to people who are most likely to benefit?
+
+---
+background-image: url(img/colantonio_2018.jpg)
+background-size: 85%
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
