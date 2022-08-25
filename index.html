@@ -51,36 +51,124 @@ class: center, middle, inverse
 
 # .huge[Risk Prediction]
 
-## .huge[(why?)]
+---
+
+## Risk prediction
+
+.large[__The goal__: predict the probability that a person will experience an event within a specific amount of time.]
+
+.large[__The intent__: direct treatment to those who are most likely to benefit]
+
+.large[__The result (in a perfect world)__:]
+
+- .large[Shared decision-making between clinicians and patients]
+
+- .large[Greater net benefit]
+
+- .large[Lower number needed to treat]
 
 ---
 
-## Why predict risk?
+## Risk prediction models
+
+.large[__Traditional risk prediction equations__]
+
+- .large[Cox proportional hazards]
+
+- .large[fully parametric survival models] 
+
+.large[__Risk prediction using machine learning__]
+
+- .large[random forests]
+
+- .large[boosted tree ensembles]
+
+- .large[neural networks]
+
+
+--
 
 &lt;br&gt;
-
---
-
-### Direct treatment to those most likely to benefit
-
---
-
-### Avoid treating those who are not likely to benefit
-
----
-class: center, middle, inverse
-
-# .huge[Machine Learning]
+.huge[Machine learning in healthcare?]
 
 ---
 background-image: url(img/meme_chicken_ml.jpg)
 background-size: contain
 
-&lt;!-- .footnote[Source: [@kareem_carr](https://twitter.com/kareem_carr/status/1374760100079017984/photo/1) - Link goes to tweet] --&gt;
+---
+background-image: url(img/segar_et_al.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_2.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_3.svg)
+background-size: contain
 
 ---
 
-## Two ways to learn
+## My perspective
+
+Dr. Segar compared several machine learning algorithms using a standard and objective procedure to find the algorithm that gave the most accurate predictions.
+
+--
+
+The machine learning algorithm that won this benchmark was the oblique random survival forest (ORSF), a model I developed in 2019 😲.
+
+--
+
+Dr. Segar _almost_ didn't use my model!
+
+- It took a very long time to run
+
+- It didn't have a good method to estimate variable importance (we found a workaround for this)
+
+---
+
+## Lessons learned
+
+I learned ORSF was a good model, but 
+
+- nobody likes slow R packages
+
+- interpretation is key
+
+So I decided I needed to make an R package for ORSF that was fast and interpretable.
+
+---
+background-image: url(img/aorsf_website.svg)
+background-size: contain
+
+---
+
+# This is who I am now 
+
+.left-column[
+
+I am an ~~R~~ `aorsf` enthusiast
+
+I like `aorsf` ~~walking my dog and learning (easy) cocktail recipes.~~
+
+I study `aorsf`&lt;br/&gt; ~~risk prediction using machine learning, generally cardiovascular disease.~~
+
+]
+
+.right-column[
+
+&lt;img src="img/run_R_kids_2.png" width="100%" align="right" /&gt;
+
+]
+
+---
+class: center, middle, inverse
+
+# .huge[Background]
+
+---
+
+## Two types of machine learning
 
 .pull-left[
 
@@ -92,7 +180,6 @@ background-size: contain
 
 .large[Learners]
 
-.large[Risk prediction]
 
 ]
 
@@ -108,11 +195,12 @@ background-size: contain
 
 .large[Organize medical records]
 
+
 ]
 
 ---
 
-## But for now...
+## For today
 
 .pull-left[
 
@@ -122,7 +210,7 @@ background-size: contain
 
 .large[Predict an outcome]
 
-.large[Learners]
+.large[Learners (decision trees &amp; random forests)]
 
 .large[Risk prediction]
 
@@ -274,6 +362,16 @@ class: center, middle, inverse
 
 ---
 
+&lt;img src="img/orsf-grandrounds-q1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: center, middle
+
+# Comparing learners
+
+---
+
 &lt;img src="img/ml_abstraction.svg" width="100%" style="display: block; margin: auto;" /&gt;
 
 .footnote[Basic steps of ML. Source: [mlr3book](https://mlr3book.mlr-org.com/basics.html)]
@@ -308,19 +406,19 @@ We'll demonstrate the mechanics of decision trees by developing a prediction rul
 
 Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station
 
-&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition all the penguins into flipper length &lt; 207 or ≥ 207 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition penguins on the left side into into bill length &lt; 43 or ≥ 43 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -353,13 +451,13 @@ class: inverse, center, middle
 
 Remember when we grew a decision tree by partitioning the penguin data?
 
-&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 With oblique splits, partitions do not need to be rectangles
 
-&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -420,15 +518,15 @@ Neural networks
 
 ---
 
-&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
 &lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 &lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle

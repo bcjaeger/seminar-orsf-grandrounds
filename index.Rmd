@@ -78,36 +78,124 @@ class: center, middle, inverse
 
 # .huge[Risk Prediction]
 
-## .huge[(why?)]
+---
+
+## Risk prediction
+
+.large[__The goal__: predict the probability that a person will experience an event within a specific amount of time.]
+
+.large[__The intent__: direct treatment to those who are most likely to benefit]
+
+.large[__The result (in a perfect world)__:]
+
+- .large[Shared decision-making between clinicians and patients]
+
+- .large[Greater net benefit]
+
+- .large[Lower number needed to treat]
 
 ---
 
-## Why predict risk?
+## Risk prediction models
+
+.large[__Traditional risk prediction equations__]
+
+- .large[Cox proportional hazards]
+
+- .large[fully parametric survival models] 
+
+.large[__Risk prediction using machine learning__]
+
+- .large[random forests]
+
+- .large[boosted tree ensembles]
+
+- .large[neural networks]
+
+
+--
 
 <br>
-
---
-
-### Direct treatment to those most likely to benefit
-
---
-
-### Avoid treating those who are not likely to benefit
-
----
-class: center, middle, inverse
-
-# .huge[Machine Learning]
+.huge[Machine learning in healthcare?]
 
 ---
 background-image: url(img/meme_chicken_ml.jpg)
 background-size: contain
 
-<!-- .footnote[Source: [@kareem_carr](https://twitter.com/kareem_carr/status/1374760100079017984/photo/1) - Link goes to tweet] -->
+---
+background-image: url(img/segar_et_al.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_2.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_3.svg)
+background-size: contain
 
 ---
 
-## Two ways to learn
+## My perspective
+
+Dr. Segar compared several machine learning algorithms using a standard and objective procedure to find the algorithm that gave the most accurate predictions.
+
+--
+
+The machine learning algorithm that won this benchmark was the oblique random survival forest (ORSF), a model I developed in 2019 😲.
+
+--
+
+Dr. Segar _almost_ didn't use my model!
+
+- It took a very long time to run
+
+- It didn't have a good method to estimate variable importance (we found a workaround for this)
+
+---
+
+## Lessons learned
+
+I learned ORSF was a good model, but 
+
+- nobody likes slow R packages
+
+- interpretation is key
+
+So I decided I needed to make an R package for ORSF that was fast and interpretable.
+
+---
+background-image: url(img/aorsf_website.svg)
+background-size: contain
+
+---
+
+# This is who I am now 
+
+.left-column[
+
+I am an ~~R~~ `aorsf` enthusiast
+
+I like `aorsf` ~~walking my dog and learning (easy) cocktail recipes.~~
+
+I study `aorsf`<br/> ~~risk prediction using machine learning, generally cardiovascular disease.~~
+
+]
+
+.right-column[
+
+<img src="img/run_R_kids_2.png" width="100%" align="right" />
+
+]
+
+---
+class: center, middle, inverse
+
+# .huge[Background]
+
+---
+
+## Two types of machine learning
 
 .pull-left[
 
@@ -119,7 +207,6 @@ background-size: contain
 
 .large[Learners]
 
-.large[Risk prediction]
 
 ]
 
@@ -135,11 +222,12 @@ background-size: contain
 
 .large[Organize medical records]
 
+
 ]
 
 ---
 
-## But for now...
+## For today
 
 .pull-left[
 
@@ -149,7 +237,7 @@ background-size: contain
 
 .large[Predict an outcome]
 
-.large[Learners]
+.large[Learners (decision trees & random forests)]
 
 .large[Risk prediction]
 
@@ -511,6 +599,18 @@ p + points_light +
 ---
 
 <iframe src="https://app.sli.do/event/skz3VjibsGSTe3YyF7D68v" height="90%" width="100%" frameBorder="0" style="min-height: 560px;" title="Which model?"></iframe>
+
+---
+
+```{r, out.width='80%'}
+knitr::include_graphics('img/orsf-grandrounds-q1.png')
+```
+
+
+---
+class: center, middle
+
+# Comparing learners
 
 ---
 
