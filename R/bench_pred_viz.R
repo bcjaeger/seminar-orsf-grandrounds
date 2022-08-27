@@ -43,7 +43,9 @@ bench_pred_viz_chicago <- function(
  )
 
  bm_pred_inner <- bm_pred_clean %>%
-  rename(eval = .data[[eval_metric]])
+  rename(eval = .data[[eval_metric]]) %>%
+  filter(model %in% model_subset) %>%
+  mutate(model = recode(model, !!!model_recoder))
 
  if(eval_metric == 'ibs_scaled'){
   bm_pred_inner <- bm_pred_inner %>%
@@ -52,7 +54,6 @@ bench_pred_viz_chicago <- function(
  }
 
  data_smry_overall <- bm_pred_inner %>%
-  filter(model %in% model_subset) %>%
   mutate(data = fct_reorder(factor(data), .x = eval)) %>%
   group_by(model) %>%
   summarize(eval = mean(eval)) %>%
@@ -62,7 +63,8 @@ bench_pred_viz_chicago <- function(
   arrange(eval) %>%
   pull(model)
 
- levels(data_smry_overall$model) <- model_levels
+ library(magrittr)
+ data_smry_overall$model %<>% factor(levels = model_levels)
 
  data_levels <- c(
   "Overall",
@@ -75,7 +77,7 @@ bench_pred_viz_chicago <- function(
  )
 
  data_smry <- bm_pred_inner %>%
-  filter(model %in% model_subset) %>%
+  filter(model %in% model_levels) %>%
   group_by(model, data) %>%
   summarize(eval = mean(eval)) %>%
   bind_rows(data_smry_overall) %>%

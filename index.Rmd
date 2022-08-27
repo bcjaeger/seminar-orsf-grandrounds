@@ -76,121 +76,6 @@ I study <br/> risk prediction using machine learning, generally cardiovascular d
 ---
 class: center, middle, inverse
 
-# .huge[Risk Prediction]
-
----
-
-## Risk prediction
-
-.large[__The goal__: predict the probability that a person will experience an event within a specific amount of time.]
-
-.large[__The intent__: direct treatment to those who are most likely to benefit]
-
-.large[__The result (in a perfect world)__:]
-
-- .large[Shared decision-making between clinicians and patients]
-
-- .large[Greater net benefit]
-
-- .large[Lower number needed to treat]
-
----
-
-## Risk prediction models
-
-.large[__Traditional risk prediction equations__]
-
-- .large[Cox proportional hazards]
-
-- .large[fully parametric survival models] 
-
-.large[__Risk prediction using machine learning__]
-
-- .large[random forests]
-
-- .large[boosted tree ensembles]
-
-- .large[neural networks]
-
-
---
-
-<br>
-.huge[Machine learning in healthcare?]
-
----
-background-image: url(img/meme_chicken_ml.jpg)
-background-size: contain
-
----
-background-image: url(img/segar_et_al.svg)
-background-size: contain
-
----
-background-image: url(img/segar_et_al_2.svg)
-background-size: contain
-
----
-background-image: url(img/segar_et_al_3.svg)
-background-size: contain
-
----
-
-## My perspective
-
-Dr. Segar compared several machine learning algorithms using a standard and objective procedure to find the algorithm that gave the most accurate predictions.
-
---
-
-The machine learning algorithm that won this benchmark was the oblique random survival forest (ORSF), a model I developed in 2019 😲.
-
---
-
-Dr. Segar _almost_ didn't use my model!
-
-- It took a very long time to run
-
-- It didn't have a good method to estimate variable importance (we found a workaround for this)
-
----
-
-## Lessons learned
-
-I learned ORSF was a good model, but 
-
-- nobody likes slow R packages
-
-- interpretation is key
-
-So I decided I needed to make an R package for ORSF that was fast and interpretable.
-
----
-background-image: url(img/aorsf_website.svg)
-background-size: contain
-
----
-
-# This is who I am now 
-
-.left-column[
-
-I am an ~~R~~ `aorsf` enthusiast
-
-I like `aorsf` ~~walking my dog and learning (easy) cocktail recipes.~~
-
-I study `aorsf`<br/> ~~risk prediction using machine learning, generally cardiovascular disease.~~
-
-]
-
-.right-column[
-
-<img src="img/run_R_kids_2.png" width="100%" align="right" />
-
-]
-
----
-class: center, middle, inverse
-
 # .huge[Background]
 
 ---
@@ -365,9 +250,126 @@ class: center, middle, inverse
 
 - .large[A recipe is not the same thing as the food!]
 
+
+---
+class: center, middle, inverse
+
+# .huge[Risk Prediction]
+
 ---
 
-## What is a good learner for these data?
+## Risk prediction
+
+.large[__The goal__: predict the probability that a person will experience an event within a specific amount of time.]
+
+.large[__The intent__: direct treatment to those who are most likely to benefit]
+
+.large[__The result (in a perfect world)__:]
+
+- .large[Shared decision-making between clinicians and patients]
+
+- .large[Greater net benefit]
+
+- .large[Lower number needed to treat]
+
+---
+
+## Risk prediction models
+
+.large[__Traditional risk prediction equations__]
+
+- .large[Cox proportional hazards]
+
+- .large[fully parametric survival models] 
+
+.large[__Risk prediction using machine learning__]
+
+- .large[random forests]
+
+- .large[boosted tree ensembles]
+
+- .large[neural networks]
+
+
+--
+
+<br>
+.huge[Machine learning in healthcare?]
+
+---
+background-image: url(img/meme_chicken_ml.jpg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_2.svg)
+background-size: contain
+
+---
+background-image: url(img/segar_et_al_3.svg)
+background-size: contain
+
+---
+
+## My perspective
+
+Dr. Segar compared several machine learning algorithms using a standard and objective procedure to find the algorithm that gave the most accurate predictions.
+
+--
+
+The machine learning algorithm that won this benchmark was the oblique random survival forest (ORSF), a model I developed in 2019 😲.
+
+--
+
+Dr. Segar _almost_ didn't use my model!
+
+- It took a very long time to run
+
+- It didn't have a good method to estimate variable importance (we found a workaround for this)
+
+---
+
+## Lessons learned
+
+I learned ORSF was a good model, but 
+
+- nobody likes slow R packages
+
+- interpretation is key
+
+So I decided I needed to make an R package for ORSF that was fast and interpretable.
+
+---
+background-image: url(img/aorsf_website.svg)
+background-size: contain
+
+---
+
+# This is who I am now 
+
+.left-column[
+
+I am an ~~R~~ `aorsf` enthusiast
+
+I like `aorsf` ~~walking my dog and learning (easy) cocktail recipes.~~
+
+I study `aorsf`<br/> ~~risk prediction using machine learning, generally cardiovascular disease.~~
+
+]
+
+.right-column[
+
+<img src="img/run_R_kids_2.png" width="100%" align="right" />
+
+]
+
+
+---
+
+## What is a good learner for this?
 
 ```{r}
 
@@ -623,7 +625,7 @@ knitr::include_graphics('img/ml_abstraction.svg')
 ---
 class: inverse, center, middle
 
-# Random Forests
+# Decision Trees and Random Forests
 
 ---
 background-image: url(img/penguins.png)
@@ -761,13 +763,22 @@ Node text, top to bottom: predicted class type; predicted class probability; % o
 
 ---
 
-## Forest = lots of trees
+## Random Forest, i.e., lots of trees
 
-.large[Random forests are large sets of de-correlated decision trees (random-ness helps de-correlate)]
+Random forests are large sets of de-correlated decision trees 
+
+- random-ness helps de-correlate the trees
 
 --
 
-.large[Predictions from random forests are just the average prediction from each tree.]
+The forest's prediction is the average prediction taken over all of the trees, i.e., 
+
+$$
+\frac{\text{p}_1 + \cdots + \text{p}_n}{n}
+$$
+where $p_i$ is the prediction from tree $i$
+
+**Variable importance**: Randomly permute a predictor and re-calculate the forest's prediction error. Noising up an important predictor will make the forest's prediction error go up a lot more than an unimportant predictor.
 
 ---
 class: inverse, center, middle
@@ -780,76 +791,7 @@ class: inverse, center, middle
 
 ---
 
-Remember when we grew a decision tree by partitioning the penguin data?
-
-```{r fig.align='center', fig.height=5, fig.width=7}
-
-penguin_fig_2parts 
-
-```
-
----
-
-With oblique splits, partitions do not need to be rectangles
-
-```{r, fig.align='center', fig.height=5, fig.width=7}
-
-x_delta <- 206.5 - 170
-y_delta <- 46 - 40
-slope <- y_delta / x_delta
-intercept <- 46 - 206.5 * slope
-text_lower <-
-  table_glue("bill length - {slope} * flipper length < {intercept}")
-text_upper <-
-  table_glue("bill length - {slope} * flipper length \u2265 {intercept}")
-data_poly <- tribble(
-  ~flipper_length_mm, ~bill_length_mm    , ~species,
-  170               ,  30                , 'Adelie',
-  206.5             ,  30                , 'Adelie',
-  206.5             ,  46                , 'Adelie',
-  170               ,  40                , 'Adelie',
-  170               ,  40                , 'Chinstrap',
-  206.5             ,  46                , 'Chinstrap',
-  206.5             ,  70                , 'Chinstrap',
-  170               ,  70                , 'Chinstrap',
-  206.5             ,  30                , 'Gentoo',
-  235               ,  30                , 'Gentoo',
-  235               ,  70                , 'Gentoo',
-  206.5             ,  70                , 'Gentoo',
-)
-ggplot(data = penguins) +
-  aes(x = flipper_length_mm, y = bill_length_mm, label = species) +
-  geom_polygon(data = data_poly, 
-               aes(fill = species, group = species),
-               alpha = 0.2,
-               col = 'black') +
-  geom_point(aes(color = species, shape = species),
-             size = 3,
-             alpha = 0.8) +
-  geom_text(
-    data = tibble(flipper_length_mm = c(172, 172), 
-                  bill_length_mm = c(68, 32), 
-                  species = c(text_upper, text_lower)),
-    hjust = 0
-  ) + 
-  theme_minimal() +
-  scale_color_manual(values = c("darkorange","purple","cyan4")) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4")) +
-  labs(x = "\nFlipper length, mm",
-       y = "Bill length, mm\n",
-       color = "Penguin species",
-       shape = "Penguin species") +
-  coord_cartesian(ylim = c(30, 70),
-                  xlim = c(170, 235)) +
-  scale_x_continuous(expand = c(0,0), breaks = c(180, 200, 220)) + 
-  scale_y_continuous(expand = c(0,0)) +
-  theme(panel.grid = element_blank(),
-        legend.position = '')
-```
-
----
-
-A decision tree's predictions are the average of the observations in each leaf
+A classification decision tree's predictions are the average of the observations in each leaf
 
 ```{r fig.align='center', out.width='100%'}
 
@@ -864,15 +806,22 @@ With survival trees, the 'average of the observations' is a survival curve.
 ```{r fig.align='center', out.width='100%'}
 
 knitr::include_graphics('img/rpart_plot_surv.png')
+
 # penguins_sim <- penguins %>%
+#  drop_na() %>%
 #   mutate(
 #     time_mean = if_else(
-#       bill_length_mm < 40,
-#       true = 40,
-#       false = 20
+#       flipper_length_mm < 207,
+#       true = 800,
+#       false = 200
 #     ),
-#     time = rnorm(n = n(), mean = time_mean, sd = 10),
-#     time = pmax(time, 2),
+#     time_mean = if_else(
+#      bill_length_mm < 43 & flipper_length_mm < 207,
+#      true = 500,
+#      false = time_mean
+#     ),
+#     time = rnorm(n = n(), mean = time_mean, sd = 150),
+#     time = pmax(time, 50),
 #     status = rbinom(n = n(), size = 1, prob = 0.75)
 #   )
 # 
@@ -880,14 +829,15 @@ knitr::include_graphics('img/rpart_plot_surv.png')
 # 
 # png(res = 300,
 #     width = 6,
-#     height = 3.75,
+#     height = 4,
 #     units = 'in',
-#     filename = 'rpart_plot_surv.png')
+#     filename = 'img/rpart_plot_surv.png')
 # 
 # mdl_ctree <-
-#   ctree(formula = Surv(time, status) ~ bill_length_mm, 
+#   ctree(formula = Surv(time, status) ~ bill_length_mm +
+#          flipper_length_mm,
 #         data = penguins_sim,
-#         controls = ctree_control(maxdepth = 1))
+#         controls = ctree_control(maxdepth = 2))
 # 
 # plot(
 #   mdl_ctree,
@@ -895,128 +845,160 @@ knitr::include_graphics('img/rpart_plot_surv.png')
 # )
 # 
 # dev.off()
+
 ```
 
 .footnote[the survival outcomes are simulated]
 
 ---
+
+oblique trees use linear combinations of variables to partition data.
+
+- axis based split: $x_1 < 10$
+
+- oblique split: $0.25 \cdot x_1 + 1.5 \cdot x_2 < 10$
+
+```{r out.width='100%'}
+knitr::include_graphics("img/axis_versus_oblique.png")
+```
+
+Both trees partition the predictor space defined by variables $x_1$ and $x_2$, but the oblique splits do a better job of separating the two classes.
+
+---
+
+## How I made ORSF faster
+
+```{r out.width='65%'}
+knitr::include_graphics('img/orsf_algo_table.svg')
+```
+
+---
+
+## How I made ORSF faster
+
+```{r out.width='65%'}
+knitr::include_graphics('img/orsf_algo_table_2.svg')
+```
+
+---
+background-image: url(img/aorsf-arxiv-paper.png)
+background-size: 85%
+
+## [aorsf paper](https://arxiv.org/abs/2208.01129)
+
+---
+
+## Negation importance
+
+Permuting the values of predictors to measure variable importance
+
+- works great when a single variable is used to partition data
+
+- sometimes makes no difference for oblique partitions because
+
+    + multiple variables are being used
+    
+    + the given variable may have a large or small coefficient
+
+--
+
+So instead of permuting the variable's values, why don't we just multiply all of its coefficients by -1?
+
+- puts more emphasis on variables with large coefficients in linear combinations
+
+- inherits all of the nice things about permutation importance.
+
+- works for __any oblique random forest__, not just the survival kind!
+
+---
+
 class: center, middle
 
-# .huge[Learners]
+# .huge[Better, Faster, more\nInterpretable]
 
 ---
 
 ## Learners for censored outcomes
 
-Cox proportional hazards model 
-
-- Forward / backward selection
-- Regularization
-
---
-
-Random forests
-
-- Conditional inference
-- Axis based & oblique
-
---
-
-Boosting
-
-- Boosted models
-- Boosted decision trees
-
---
-
-Neural networks
-
-- Coxnet
-- Deepsurv
-
----
-
-## Software for the learners
-
 ```{r,echo=FALSE, cache=TRUE, warning=FALSE}
 
-# gg_data <- tribble(
-#  ~ package,       ~ learners,
-#  'xgboost',         'boosted trees',
-#  'ranger',          'random forest',
-#  'glmnet',          'penalized regression',
-#  'party',           'conditional inference forest',
-#  'randomForestSRC', 'random forest',
-#  'survivalmodels',  'neural networks',
-#  'obliqueRSF',      'oblique random survival forest'
-# ) %>%
-#  mutate(
-#   downloads = map(
-#    package,
-#    .f = cranlogs::cran_downloads,
-#    from = today() - years(3),
-#    to = today()
-#   )
-#  )
-# 
-# gg_plots <- gg_data %>%
-#  mutate(downloads = map(downloads, select, -package)) %>%
-#  unnest(downloads) %>%
-#  filter(count > 0) %>%
-#  group_by(package) %>%
-#  mutate(cm = data.table::frollmean(count, n = 100)) %>%
-#  nest() %>%
-#  mutate(
-#   plot = map(
-#    .x = data,
-#    .f =  ~ ggplot(drop_na(.x)) +
-#    aes(x = date, y = cm) +
-#    geom_point(alpha = 1/2) +
-#    geom_smooth(method = 'lm',
-#                formula = y ~ poly(x, 3),
-#                se = FALSE,
-#                color = 'red') +
-#    scale_y_log10() +
-#    theme_void()
-#   )
-#  ) %>%
-#  select(-data)
-# 
-# gt_data <- gg_data %>%
-#  mutate(
-#   downloads = map_dbl(downloads, ~sum(.x$count)),
-#   fig = NA
-#  ) %>%
-#  left_join(gg_plots, by = 'package') %>%
-#  arrange(desc(downloads)) %>%
-#  mutate(
-#   downloads = table.glue::table_value(as.integer(downloads))
-#  )
-# 
-# gt_data %>%
-#  select(-plot) %>%
-#  gt(rowname_col = 'package') %>%
-#  text_transform(
-#   locations = cells_body(columns = fig),
-#   fn = function(x) {
-#    map(
-#     .x = gt_data$plot,
-#     .f = ggplot_image,
-#     height = px(40),
-#     aspect_ratio = 3
-#    )
-#   }
-#  ) %>%
-#  tab_stubhead(label = 'R Package') %>%
-#  cols_label(fig = 'Trends over time',
-#             learners = 'Learner',
-#             downloads = 'Total downloads') %>%
-#  cols_align('left', columns = c('learners', 'downloads')) %>%
-#  tab_options(table.width = pct(100)) %>%
-#  tab_source_note(
-#   paste("Data span from", today() - years(2),
-#         "to", today())
-#  )
+gg_data <- tribble(
+ ~ package,       ~ learners,
+ 'xgboost',         'boosted trees',
+ 'ranger',          'random forest',
+ 'glmnet',          'penalized regression',
+ 'party',           'conditional inference forest',
+ 'randomForestSRC', 'random forest',
+ 'survivalmodels',  'neural networks',
+ 'obliqueRSF',      'oblique random survival forest'
+) %>%
+ mutate(
+  downloads = map(
+   package,
+   .f = cranlogs::cran_downloads,
+   from = today() - years(3),
+   to = today()
+  )
+ )
+
+gg_plots <- gg_data %>%
+ mutate(downloads = map(downloads, select, -package)) %>%
+ unnest(downloads) %>%
+ filter(count > 0) %>%
+ group_by(package) %>%
+ mutate(cm = data.table::frollmean(count, n = 100)) %>%
+ nest() %>%
+ mutate(
+  plot = map(
+   .x = data,
+   .f =  ~ ggplot(drop_na(.x)) +
+   aes(x = date, y = cm) +
+   geom_point(alpha = 1/2) +
+   geom_smooth(method = 'lm',
+               formula = y ~ poly(x, 3),
+               se = FALSE,
+               color = 'red') +
+   scale_y_log10() +
+   theme_void()
+  )
+ ) %>%
+ select(-data)
+
+gt_data <- gg_data %>%
+ mutate(
+  downloads = map_dbl(downloads, ~sum(.x$count)),
+  fig = NA
+ ) %>%
+ left_join(gg_plots, by = 'package') %>%
+ arrange(desc(downloads)) %>%
+ mutate(
+  downloads = table.glue::table_value(as.integer(downloads))
+ )
+
+gt_data %>%
+ select(-plot) %>%
+ gt(rowname_col = 'package') %>%
+ text_transform(
+  locations = cells_body(columns = fig),
+  fn = function(x) {
+   map(
+    .x = gt_data$plot,
+    .f = ggplot_image,
+    height = px(40),
+    aspect_ratio = 3
+   )
+  }
+ ) %>%
+ tab_stubhead(label = 'R Package') %>%
+ cols_label(fig = 'Trends over time',
+            learners = 'Learner',
+            downloads = 'Total downloads') %>%
+ cols_align('left', columns = c('learners', 'downloads')) %>%
+ tab_options(table.width = pct(100)) %>%
+ tab_source_note(
+  paste("Data span from", today() - years(2),
+        "to", today())
+ )
 
 ```
 
@@ -1025,9 +1007,35 @@ Neural networks
 # prep the bm results ----
 
 bm_pred_clean <- read_rds('data/bm_pred_clean.rds')
-model_key <- read_rds("data/model_key.rds")
+
+model_key <- read_rds("data/model_key.rds") %>% 
+ mutate(
+  label                    = recode(
+   label,
+   'obliqueRSF-net' = 'obliqueRSF',
+   'aorsf-fast' = 'aorsf',
+   'xgboost-cox' = 'xgboost',
+   'glmnet-cox' = 'glmnet',
+   'rsf-standard' = 'randomForestSRC',
+   'ranger-extratrees' = 'ranger',
+   'cif-standard' = 'party',
+   'nn-cox' = 'neural network' 
+  )
+ )
+
 data_key <- read_rds("data/data_key.rds")
 
+fig_subsets <- list(
+ slide_one = c('obliqueRSF', 
+               'randomForestSRC',
+               'ranger', 
+               'party'),
+ slide_two = c('obliqueRSF', 
+               'aorsf', 
+               'randomForestSRC',
+               'ranger', 
+               'party')
+)
 
 fig_chicago <- bm_pred_clean %>% 
  bench_pred_viz_chicago(data_key, 
@@ -1038,6 +1046,59 @@ fig_bm <- bm_pred_clean %>%
  bench_pred_visualize(data_key, model_key)
 
 ```
+
+---
+
+## A benchmark
+
+- Compare the computational efficiency and prediction accuracy of `aorsf` to the leading R packages
+
+    + 21 unique datasets containing 35 unique risk prediction tasks
+
+- Compare negation VI to the leading methods for interpreting random forests (and other types of algorithms)
+
+    + simulation study
+
+---
+
+## Zooming in
+
+- One task: predicting mortality risk for patients with primary biliary cholangitis.
+
+- Two learners: `aorsf` and `ranger`
+
+- Performance measure: __Index of prediction accuracy__ (think $R^2$ for risk prediction)
+
+---
+
+## Zooming in
+
+```{r}
+
+
+data_gg <- bm_pred_clean %>% 
+ filter(model %in% c('aorsf_fast', 'ranger'),
+        data == 'pbc_orsf') %>% 
+ mutate(model = recode(model, !!!deframe(model_key))) 
+
+medians <- data_gg %>% 
+ group_by(model) %>% 
+ summarize(ibs_scaled = median(ibs_scaled))
+ 
+ggplot(data_gg) + 
+ aes(x = model, y = ibs_scaled, fill = model) + 
+ geom_jitter(size = 2, shape = 21, color = 'grey') + 
+ geom_boxplot(alpha = 0.25) +
+ scale_fill_manual(values = c('purple', 'orange')) +
+ theme(legend.position = '') + 
+ labs(x = '', y = 'Index of prediction accuracy') + 
+ scale_y_continuous(breaks = medians$ibs_scaled,
+                    labels = round(medians$ibs_scaled*100))
+ 
+
+```
+
+
 
 ---
 
