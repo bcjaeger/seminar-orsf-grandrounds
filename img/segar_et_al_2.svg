@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.4823793"
-     inkscape:cx="387.21532"
-     inkscape:cy="244.53929"
+     inkscape:cx="386.87804"
+     inkscape:cy="244.5393"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -33,7 +33,50 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
-     id="defs2" />
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="marker111411"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path111409" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path111042" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path111045" />
+    </marker>
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -54,12 +97,17 @@
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
          x="51.9203"
          y="39.401691"
-         id="tspan15265">Atherosclerosis Risk</tspan><tspan
+         id="tspan69863" /><tspan
          sodipodi:role="line"
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
          x="51.9203"
          y="48.221142"
-         id="tspan69863">in Communities Study</tspan></text>
+         id="tspan97463">Validate model</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="51.9203"
+         y="57.040592"
+         id="tspan97465">among black adults</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
@@ -75,7 +123,17 @@
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
          x="157.64394"
          y="43.811417"
-         id="tspan44145">Dallas Heart Study</tspan></text>
+         id="tspan44145" /><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="157.64394"
+         y="52.630867"
+         id="tspan99549">Validate model</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="157.64394"
+         y="61.450317"
+         id="tspan99551">among black adults</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
@@ -91,7 +149,17 @@
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
          x="52.121914"
          y="120.89916"
-         id="tspan38723">Jackson Heart Study</tspan></text>
+         id="tspan38723" /><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="52.121914"
+         y="129.71861"
+         id="tspan87366">Develop model for</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="52.121914"
+         y="138.53806"
+         id="tspan89878">black adults</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.264583"
@@ -107,12 +175,17 @@
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
          x="157.64394"
          y="117.14573"
-         id="tspan56829">Multi-Ethnic Study</tspan><tspan
+         id="tspan65719" /><tspan
          sodipodi:role="line"
          style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
-         x="158.88417"
+         x="157.64394"
          y="125.96518"
-         id="tspan65719">of Atherosclerosis </tspan></text>
+         id="tspan104739">Validate model</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.05556px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="157.64394"
+         y="134.78462"
+         id="tspan104741">among black adults</tspan></text>
     <rect
        style="fill:#b05d21;fill-opacity:0.25396827;stroke:#000000;stroke-width:0.505133;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect8800"
@@ -141,5 +214,13 @@
        height="74.494865"
        x="108.13589"
        y="77.340309" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:url(#marker111411)"
+       d="M 62.088944,27.84375 C 112.24339,48.012622 90.289667,90.313705 90.289667,90.313705 122.41707,43.371997 144.90626,33.376804 144.90626,33.376804"
+       id="path110923" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker111411)"
+       d="m 90.289667,90.313705 c 27.843753,-3.21274 53.367183,14.100355 53.367183,14.100355"
+       id="path110925" />
   </g>
 </svg>

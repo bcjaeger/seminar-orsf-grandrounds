@@ -1087,9 +1087,9 @@ A common approach: _permutation_ importance<sup>1</sup>
 
 **Assumptions**:
 
-Noising up an important predictor will hurt the forest's prediction accuracy.
+Permuting an important predictor will hurt the forest's prediction accuracy.
 
-Noising up unimportant predictors will not impact prediction accuracy. 
+Permuting an unimportant predictor will not impact prediction accuracy. 
 
 ---
 
@@ -1299,21 +1299,17 @@ class: center, middle, inverse
 
 ---
 
-## Censoring
-
-```{r out.width='90%', echo=FALSE, fig.align='center'}
-knitr::include_graphics('img/ml-supervised-8.svg')
-```
-
----
-
 ## Risk prediction
 
-.large[__The goal__: predict the probability that a person will experience an event within a specific amount of time.]
+.large[__Goal__: predict event probability within a given time.]
 
-.large[__The intent__: direct treatment to those who are most likely to benefit]
+--
 
-.large[__The result (in a perfect world)__:]
+.large[__Intent__: direct treatment to those who are most likely to benefit]
+
+--
+
+.large[__Result (in a perfect world)__:]
 
 - .large[Shared decision-making between clinicians and patients]
 
@@ -1322,6 +1318,10 @@ knitr::include_graphics('img/ml-supervised-8.svg')
 - .large[Lower number needed to treat]
 
 - .large[Fewer serious adverse events]
+
+--
+
+.large[__Prediction accuracy metric__: C-statistic (aka C-index) 😒]
 
 <!-- --- -->
 <!-- background-image: url(img/meme_chicken_ml.jpg) -->
@@ -1395,28 +1395,28 @@ Discrimination and calibration of **models** for predicting 10-Year risk of deve
 
 tribble(
  ~cohort, ~model, ~colname, ~value,
- "ARIC", "oRSF",	"Concordance index", "0.80",	
+ "ARIC", "oRSF",	"C-statistic", "0.80",	
  "ARIC", "oRSF",	"GND P-value", "0.26",
  "ARIC", "oRSF",	"DeLong test P-value", "Ref",
- "MESA/DHS", "oRSF",	"Concordance index", "0.83",
+ "MESA/DHS", "oRSF",	"C-statistic", "0.83",
  "MESA/DHS", "oRSF",	"GND P-value", "0.17",
  "MESA/DHS", "oRSF",	"DeLong test P-value", "Ref",
- "ARIC", "ARIC-HF risk score", "Concordance index",	"0.77",
+ "ARIC", "ARIC-HF risk score", "C-statistic",	"0.77",
  "ARIC", "ARIC-HF risk score", "GND P-value",	"0.35",
  "ARIC", "ARIC-HF risk score", "DeLong test P-value",	"<0.001",
- "MESA/DHS", "ARIC-HF risk score", "Concordance index",	"0.80",
+ "MESA/DHS", "ARIC-HF risk score", "C-statistic",	"0.80",
  "MESA/DHS", "ARIC-HF risk score", "GND P-value",	"<0.001",
  "MESA/DHS", "ARIC-HF risk score", "DeLong test P-value",	"0.01",
- "ARIC", "PCP-HF risk score", "Concordance index", "0.73",
+ "ARIC", "PCP-HF risk score", "C-statistic", "0.73",
  "ARIC", "PCP-HF risk score", "GND P-value", "0.07",
  "ARIC", "PCP-HF risk score", "DeLong test P-value", "<0.001",
- "MESA/DHS", "PCP-HF risk score", "Concordance index", "0.75",
+ "MESA/DHS", "PCP-HF risk score", "C-statistic", "0.75",
  "MESA/DHS", "PCP-HF risk score", "GND P-value", "0.04",
  "MESA/DHS", "PCP-HF risk score", "DeLong test P-value", "<0.001",
- "ARIC", "MESA-HF risk score", "Concordance index", "0.72",
+ "ARIC", "MESA-HF risk score", "C-statistic", "0.72",
  "ARIC", "MESA-HF risk score", "GND P-value", "0.55",
  "ARIC", "MESA-HF risk score", "DeLong test P-value", "<0.001",
- "MESA/DHS", "MESA-HF risk score", "Concordance index", "0.78",
+ "MESA/DHS", "MESA-HF risk score", "C-statistic", "0.78",
  "MESA/DHS", "MESA-HF risk score", "GND P-value", "0.54",
  "MESA/DHS", "MESA-HF risk score", "DeLong test P-value", "0.006"
 ) %>% 
@@ -1426,7 +1426,7 @@ tribble(
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of Concordance index compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
  )
 
 ```
@@ -1442,16 +1442,16 @@ Discrimination and calibration of **models** for predicting 10-year risk of deve
 
 tribble(
  ~ model, ~colname, ~value,
- "oRSF", "Concordance index", "0.82",
+ "oRSF", "C-statistic", "0.82",
  "oRSF", "GND P-value", "0.27",
  "oRSF", "DeLong test P-value", "Ref",
- "ARIC-HF risk score",	"Concordance index", "0.79",
+ "ARIC-HF risk score",	"C-statistic", "0.79",
  "ARIC-HF risk score",	"GND P-value", "0.001",
  "ARIC-HF risk score",	"DeLong test P-value", "0.008",
- "PCP-HF risk score", "Concordance index", "0.75",
+ "PCP-HF risk score", "C-statistic", "0.75",
  "PCP-HF risk score", "GND P-value", "0.01",
  "PCP-HF risk score", "DeLong test P-value", "<0.001",
- "MESA-HF risk score", "Concordance index", "0.80",
+ "MESA-HF risk score", "C-statistic", "0.80",
  "MESA-HF risk score", "GND P-value", "0.40",
  "MESA-HF risk score", "DeLong test P-value", "0.044"
 ) %>% 
@@ -1460,7 +1460,7 @@ tribble(
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of Concordance index compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
  )
 
 
@@ -1521,7 +1521,7 @@ eval_fig_data <- read_rds('data/eval_fig_data.rds') %>%
   metric = recode(
    metric,
    "Scaled integrated Brier score" = 'Index of Prediction Accuracy',
-   "Time-dependent C-statistic" = 'Concordance index'
+   "Time-dependent C-statistic" = 'C-statistic'
   )
  ) %>% 
  filter(model != 'aorsf-cph',
@@ -1811,8 +1811,17 @@ figs_time$slide_two
 
 
 ---
-background-image: url(img/aorsf_website.svg)
-background-size: contain
+
+## New software: aorsf 
+
+Full documentation here: https://bcjaeger.github.io/aorsf/
+
+```{r}
+
+knitr::include_url("https://bcjaeger.github.io/aorsf/")
+
+```
+
 
 ---
 
@@ -1839,7 +1848,7 @@ I study `aorsf`<br/> ~~risk prediction using machine learning, generally cardiov
 
 ## Accelerated oRSF
 
-Two reasons why the accelerated oRSF is faster:
+I made oRSF faster with:
 
 1. Better code design (see my [JSM talk](https://bcjaeger.github.io/seminar-fastpack/#1))
 
@@ -1847,16 +1856,19 @@ Two reasons why the accelerated oRSF is faster:
 
 **Question**: less precise linear combinations $\Rightarrow$ worse predictions?
 
---
-
-
 ---
 
-## How I made oRSF more interpretable 
+## Interpretable oRSF
+
+Few methods for variable importance with oblique random forests
+
+- permutation isn't ideal (disagree? let's talk over coffee). 
+
+--
 
 I developed a new method: __negation importance__
 
-- instead of permuting a variable's values, _negate_ the variable's contribution in linear combinations
+- instead of permuting a variable's values, _negate_ the variable's contribution to linear combinations
 
 - puts more emphasis on variables with large coefficients in linear combinations
     
@@ -1867,8 +1879,7 @@ I developed a new method: __negation importance__
 **Question**: Use negation instead of permutation $\Rightarrow$ better variable selection?
 
 ---
-
-class: center, middle
+class: center, middle, inverse
 
 # .huge[Benchmarks]
 
@@ -1919,97 +1930,55 @@ fig_bm <- bm_pred_clean %>%
 
 ---
 
-## Two benchmarks
+## Prediction benchmark
 
-- Compare the prediction accuracy of `aorsf` versus leading R packages:
+**Prediction accuracy**
 
-    + 21 unique datasets containing 35 unique risk prediction tasks
+- Compare the C-statistic of `aorsf` versus leading R packages:
+
+    + 35 risk prediction tasks from 21 datasets.
     
-    + Formally test if `aorsf` is equivalent to its predecessor, `obliqueRSF`
+    + Main question: is `aorsf`'s C-statistic equivalent to `obliqueRSF`?
+    
+See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 
-- Compare negation importance to the leading methods for interpreting random forests (and other types of algorithms)
+---
+
+## Prediction benchmark
+
+```{r}
+
+figs_eval$`C-statistic`
+
+```
+
+---
+
+## Importance benchmark
+
+**Variable ranking**
+
+- Compare negation importance to leading methods
 
     + Simulate data with some junk variables and some signal variables
+
+    + 9 scenarios, 4 types of signal variables $\Rightarrow$ 36 experiments.
     
-    + Who is most likely to rank the signal variables higher than junk variables?
+    + Overall, who is best at ranking signal higher than junk?
+
+See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 
 ---
 
-## Prediction benchmark
-
-- Zoom in to one task: predicting mortality risk for patients with primary biliary cholangitis.
-
-- Two learners: `aorsf` and `ranger`
-
-- Performance measure: __Index of prediction accuracy__ (think $R^2$ for risk prediction)
-
----
-
-## Prediction benchmark
-
-```{r}
-
-
-data_gg <- bm_pred_clean %>% 
- filter(model %in% c('aorsf_fast', 'ranger'),
-        data == 'pbc_orsf') %>% 
- mutate(model = recode(model, !!!deframe(model_key))) 
-
-medians <- data_gg %>% 
- group_by(model) %>% 
- summarize(ibs_scaled = median(ibs_scaled))
- 
-ggplot(data_gg) + 
- aes(x = model, y = ibs_scaled, fill = model) + 
- geom_jitter(size = 2, shape = 21, color = 'grey') + 
- geom_boxplot(alpha = 0.25) +
- scale_fill_manual(values = c('purple', 'orange')) +
- theme(legend.position = '') + 
- labs(x = '', y = 'Index of prediction accuracy') + 
- scale_y_continuous(breaks = medians$ibs_scaled,
-                    labels = round(medians$ibs_scaled*100))
- 
-
-```
-
----
-
-```{r fig.height=9}
-
-fig_chicago$small
-
-```
-
----
-
-```{r fig.height=9}
-
-fig_chicago$big
-
-```
-
----
-
-```{r fig.height=9}
-
-fig_bm$fig
-
-```
-
----
-
-```{r}
-figs_eval$`Index of Prediction Accuracy`
-```
-
-
----
+## Importance benchmark
 
 ```{r}
 
 library(plotly)
 
-bm_vi_smry <- read_rds('data/bm_vi_smry.rds')
+bm_vi_smry <- read_rds('data/bm_vi_smry.rds') %>% 
+ mutate(model = recode(model,
+                       'rfsrc-permutation' = 'rsf-permute'))
 
 fig_data <- bm_vi_smry %>%
  group_by(model) %>% 
@@ -2047,10 +2016,10 @@ fig_data <- bm_vi_smry %>%
   )
  ) 
 
-fig <- plot_ly(width = 800, height = 625) %>%
+fig <- plot_ly(width = 800, height = 500) %>%
  add_trace(
   type = 'bar',
-  x = fig_data$model,
+  x = 1,
   y = fig_data$overall,
   color = fig_data$model,
   colors = "PuRd",
@@ -2061,7 +2030,8 @@ fig <- plot_ly(width = 800, height = 625) %>%
  ) %>%
  plotly::layout(
   yaxis = list(title = 'C-statistic for variable selection',
-               range = c(1/2, 1)),
+               range = c(0.5, 0.8)),
+  xaxis = list(title = "", visible = F),
   legend = list(title = list(text = '<b>VI technique</b>'))
  )
 
@@ -2069,56 +2039,206 @@ fig
 
 ```
 
+---
+
+# Acknowledments 
+
+This research was supported by the Center for Biomedical Informatics, Wake Forest University School of Medicine and the National Center for Advancing Translational Sciences (NCATS), National Institutes of Health, through Grant Award Number UL1TR001420. The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH. 
+
+---
+background-image: url(img/orsf_collaborators.svg)
+background-size: contain
+
+---
+
 
 ---
 class: center, middle
 
 # .huge[BONUS ROUND]
 
----
+```{r}
+mesa_aric <- 
+ readr::read_csv('../aorsf-bench/data/mesa_and_aric.csv') %>% 
+ filter(Race == 'W') %>% 
+ select(-ID, -Race, -LVEF, -LVMi, -QTc, -CV, -LVHcv, -LVHsl, -LAnova) %>% 
+ mutate(across(where(is.character), as.factor),
+        Smoking = factor(Smoking),
+        Alcohol = factor(Alcohol),
+        NTproBNP = log(NTproBNP)) 
 
-## 2017 ACC/AHA High ASCVD risk
+mesa <- filter(mesa_aric, database == 'mesa') %>% 
+ select(-database,
+        -VisitDate,
+        -matches(".*_death$|.*_chd$|.*_stroke$")) %>% 
+ drop_na()
 
-__Definition__: clinical CVD or __predicted 10-year ASCVD risk ≥ 10%__
+aric <- filter(mesa_aric, database == 'aric') %>% 
+ select(-database,
+        -VisitDate,
+        -matches(".*_death$|.*_chd$|.*_stroke$")) %>% 
+ drop_na()
 
-As a matter of practical convenience, adults with stage 1 hypertension and 
+set.seed(329)
 
-- diabetes mellitus, 
+library(aorsf)
+library(survival)
+library(SurvMetrics)
 
-- CKD (chronic kidney disease), or 
+```
 
-- ≥ 65 years of age 
-
-are considered to have high ASCVD risk by the guideline. 
-
-This recommendation was based on the assumption that most adults with diabetes, CKD, or ≥ 65 years of age are likely to have a 10-year predicted ASCVD risk ≥ 10% and data from surveys suggesting most clinicians, including cardiologists, do not assess ASCVD risk using recommended risk prediction tools.
-
-.footnote[
-<sup>1</sup>See Sections 9.3, 9.6, and 10.3 of  [the guideline](https://www.ahajournals.org/doi/pdf/10.1161/HYP.0000000000000065)
-]
-
----
-
-## Pooled cohort risk equations
-
-Predict 10-year risk for a first atherosclerotic cardiovascular disease (ASCVD) event.
-
-The American College of Cardiology and American Heart Association (ACC/AHA) recommend using these equations to guide clinical decisions related to the management and treatment of stage 1 hypertension.
-
---
-
-- Nonpharmalogical therapy for all adults with stage 1 hypertension
-
-- For adults with stage 1 hypertension **and high CVD risk**, nonpharmalogical therapy **and** initiation or intensification of antihypertensive medication
-
-- High CVD risk = clinical CVD or predicted 10-year ASCVD risk ≥ 10%
-
---
-
-Does this recommendation help direct antihypertensive medication to people who are most likely to benefit?
 
 ---
-background-image: url(img/colantonio_2018.jpg)
-background-size: 85%
+
+## Censoring
+
+```{r out.width='90%', echo=FALSE, fig.align='center'}
+knitr::include_graphics('img/ml-supervised-8.svg')
+```
+
 
 ---
+
+## How do you use aorsf?
+
+```{r echo=TRUE, cache=TRUE}
+
+library(aorsf)
+library(survival)
+library(SurvMetrics)
+
+fit <- orsf(data = aric, 
+            formula = Surv(time_hf, censor_hf) ~ .,
+            importance = 'negate')
+
+preds <- predict(fit, 
+                 new_data = mesa,
+                 pred_type = 'surv',
+                 pred_horizon = 10)
+
+Cindex(with(mesa, Surv(time_hf, censor_hf)), 
+       predicted = preds,
+       t_star = 10)
+
+```
+
+---
+
+```{r, echo=TRUE}
+
+enframe(orsf_vi(fit))
+
+```
+
+
+---
+## How do you use aorsf?
+
+```{r, echo=TRUE, cache=TRUE}
+
+pd <- fit %>% 
+ orsf_pd_oob(
+  pred_type = 'risk',
+  pred_horizon = 10,
+  pred_spec = list(Sex = c("F","M"), 
+                   NTproBNP = seq(log(20), log(210), by = .2))
+ )
+
+as_tibble(pd)
+
+```
+
+---
+
+## How do you use aorsf?
+
+```{r}
+ggplot(pd) + 
+ aes(x = NTproBNP, y = mean, 
+     color = fct_reorder2(Sex, .x = NTproBNP, .y = mean)) + 
+ geom_line(size = 1.2) +
+ theme_bw() +
+ theme(panel.grid = element_blank()) +
+ scale_color_manual(values = c("orange", "purple")) +
+ labs(x = 'log NP levels',
+      y = 'Mean predicted 10-year HF risk',
+      color = 'Sex')
+```
+
+---
+
+## Data sets
+
+```{r}
+
+data_key <- readr::read_rds('data/data_key.rds')
+
+tbls <- data_key |> 
+ select(label, outcome, nrow, ncol, nevent, pcens, pmiss, pctns) |> 
+ mutate(
+  across(starts_with('p'),  ~.x * 100),
+  across(where(is.numeric), .fns = table_value),
+  outcome = Hmisc::capitalize(outcome)
+ ) |> 
+ arrange(label) |> 
+ mutate(grp = seq(n()),
+        grp = case_when(
+         grp > 3 * n()/4 ~ 4,
+         grp > 2 * n()/4 ~ 3, 
+         grp > 1 * n()/4 ~ 2,
+         TRUE ~ 1
+        )) |> 
+ group_by(grp) |> 
+ group_map(
+  ~ .x |> 
+   gt(rowname_col = 'label') |> 
+   cols_label(
+    outcome = 'Outcome',
+    nrow = 'N Obs',
+    ncol = 'N Predictors',
+    nevent = 'N Events',
+    pcens = '% Censored',
+    pmiss = '% Missing',
+    pctns = "% Continuous"
+   ) |> 
+   cols_align(align = 'center') |> 
+   cols_align(align = 'left', columns = 'outcome') |>
+   tab_stubhead(label = 'Dataset')
+ )
+
+tbls[[1]]
+
+```
+
+---
+## Data sets continued
+
+```{r}
+
+tbls[[2]]
+
+```
+
+---
+
+## Data sets continued
+
+```{r}
+
+tbls[[3]]
+
+```
+
+---
+
+## Data sets continued
+
+```{r}
+
+tbls[[4]]
+
+```
+
+
+
+
