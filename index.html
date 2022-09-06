@@ -787,12 +787,6 @@ Avoid the right side of every restaurant you enter? Overfitting.&lt;sup&gt;1&lt;
 .footnote[Assuming being on the left hand side of a room does not generally improve the taste of food.]
 
 ---
-
-&lt;img src="img/ml_abstraction.svg" width="100%" style="display: block; margin: auto;" /&gt;
-
-.footnote[Basic steps of ML. Source: [mlr3book](https://mlr3book.mlr-org.com/basics.html)]
-
----
 class: center, middle, inverse
 
 # .huge[Decision Trees and Random Forests]
@@ -820,19 +814,19 @@ We'll demonstrate the mechanics of decision trees by developing a prediction rul
 
 Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station
 
-&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition all the penguins into flipper length &lt; 207 or ≥ 207 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition penguins on the left side into into bill length &lt; 43 or ≥ 43 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -871,13 +865,13 @@ is **much** more accurate than a standard decision tree.
 
 Contours of predictions from **individual trees** in a random forest
 
-&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 The **ensemble** decision boundary from a random forest
 
-&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -897,40 +891,32 @@ A common approach: _permutation_ importance&lt;sup&gt;1&lt;/sup&gt;
 
 .footnote[&lt;sup&gt;1&lt;/sup&gt;technical details are being omitted]
 
---
-
-**Assumptions**:
-
-Permuting an important predictor will hurt the forest's prediction accuracy.
-
-Permuting an unimportant predictor will not impact prediction accuracy. 
-
 ---
 
 
 
 **Initial classification accuracy**: 0.96
 
-&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 **Demo**: permute 1 value of flipper length:
 
-&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 After permuting flipper length: 0.61, so importance of flipper length is 0.35
 
-&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 After permuting bill length: 0.63, so importance of bill length is 0.33
 
-&lt;img src="index_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
@@ -967,12 +953,6 @@ Both trees partition the predictor space defined by variables `\(x_1\)` and `\(x
 class: center, middle, inverse
 
 # .huge[Risk Prediction]
-
----
-
-## Censoring
-
-&lt;img src="img/ml-supervised-8.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1452,7 +1432,7 @@ Discrimination of **learners** for predicting 10-Year risk of developing heart f
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Lasso Cox regression</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Ridge Cox regression</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Boosted Cox regression</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Boosted tree</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Boosted trees</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -2438,13 +2418,13 @@ class: center, middle, inverse
 
 ## initial software: obliqueRSF
 
-&lt;img src="index_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## new software: aorsf
 
-&lt;img src="index_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -2538,7 +2518,7 @@ See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 
 ## Prediction benchmark
 
-&lt;img src="index_files/figure-html/unnamed-chunk-59-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -2561,7 +2541,7 @@ See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 ## Importance benchmark
 
 <div id="htmlwidget-a190c3c1d0898e142789" style="width:800px;height:500px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a190c3c1d0898e142789">{"x":{"visdat":{"d38c56c35b65":["function () ","plotlyVisDat"]},"cur_data":"d38c56c35b65","attrs":{"d38c56c35b65":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","x":1,"y":[0.738628477366255,0.759151111111111,0.731547572016461,0.677470452674897,0.646197199818852,0.696268395061728],"color":["aorsf-anova","aorsf-negate","aorsf-permute","rfsrc-permutation","xgboost-gain","xgboost-shap"],"colors":"PuRd","text":["0.74","0.76","0.73","0.68","0.65","0.70"],"textposition":"outside","hoverinfo":"text","hovertext":["aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56"],"inherit":true}},"layout":{"width":800,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"C-statistic for variable selection","range":[0.5,0.8]},"xaxis":{"domain":[0,1],"automargin":true,"title":"","visible":false},"legend":{"title":{"text":"<b>VI technique<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"bar","x":[1],"y":[0.646197199818852],"text":"0.65","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","name":"xgboost-gain","marker":{"color":"rgba(241,238,246,1)","line":{"color":"rgba(241,238,246,1)"}},"textfont":{"color":"rgba(241,238,246,1)"},"error_y":{"color":"rgba(241,238,246,1)"},"error_x":{"color":"rgba(241,238,246,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.677470452674897],"text":"0.68","textposition":"outside","hoverinfo":"text","hovertext":"rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","name":"rfsrc-permutation","marker":{"color":"rgba(212,185,218,1)","line":{"color":"rgba(212,185,218,1)"}},"textfont":{"color":"rgba(212,185,218,1)"},"error_y":{"color":"rgba(212,185,218,1)"},"error_x":{"color":"rgba(212,185,218,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.696268395061728],"text":"0.70","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56","name":"xgboost-shap","marker":{"color":"rgba(201,148,199,1)","line":{"color":"rgba(201,148,199,1)"}},"textfont":{"color":"rgba(201,148,199,1)"},"error_y":{"color":"rgba(201,148,199,1)"},"error_x":{"color":"rgba(201,148,199,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.731547572016461],"text":"0.73","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","name":"aorsf-permute","marker":{"color":"rgba(223,101,176,1)","line":{"color":"rgba(223,101,176,1)"}},"textfont":{"color":"rgba(223,101,176,1)"},"error_y":{"color":"rgba(223,101,176,1)"},"error_x":{"color":"rgba(223,101,176,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.738628477366255],"text":"0.74","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","name":"aorsf-anova","marker":{"color":"rgba(221,28,119,1)","line":{"color":"rgba(221,28,119,1)"}},"textfont":{"color":"rgba(221,28,119,1)"},"error_y":{"color":"rgba(221,28,119,1)"},"error_x":{"color":"rgba(221,28,119,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.759151111111111],"text":"0.76","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","name":"aorsf-negate","marker":{"color":"rgba(152,0,67,1)","line":{"color":"rgba(152,0,67,1)"}},"textfont":{"color":"rgba(152,0,67,1)"},"error_y":{"color":"rgba(152,0,67,1)"},"error_x":{"color":"rgba(152,0,67,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-a190c3c1d0898e142789">{"x":{"visdat":{"46741f231424":["function () ","plotlyVisDat"]},"cur_data":"46741f231424","attrs":{"46741f231424":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","x":1,"y":[0.738628477366255,0.759151111111111,0.731547572016461,0.677470452674897,0.646197199818852,0.696268395061728],"color":["aorsf-anova","aorsf-negate","aorsf-permute","rfsrc-permutation","xgboost-gain","xgboost-shap"],"colors":"PuRd","text":["0.74","0.76","0.73","0.68","0.65","0.70"],"textposition":"outside","hoverinfo":"text","hovertext":["aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56"],"inherit":true}},"layout":{"width":800,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"C-statistic for variable selection","range":[0.5,0.8]},"xaxis":{"domain":[0,1],"automargin":true,"title":"","visible":false},"legend":{"title":{"text":"<b>VI technique<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"bar","x":[1],"y":[0.646197199818852],"text":"0.65","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","name":"xgboost-gain","marker":{"color":"rgba(241,238,246,1)","line":{"color":"rgba(241,238,246,1)"}},"textfont":{"color":"rgba(241,238,246,1)"},"error_y":{"color":"rgba(241,238,246,1)"},"error_x":{"color":"rgba(241,238,246,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.677470452674897],"text":"0.68","textposition":"outside","hoverinfo":"text","hovertext":"rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","name":"rfsrc-permutation","marker":{"color":"rgba(212,185,218,1)","line":{"color":"rgba(212,185,218,1)"}},"textfont":{"color":"rgba(212,185,218,1)"},"error_y":{"color":"rgba(212,185,218,1)"},"error_x":{"color":"rgba(212,185,218,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.696268395061728],"text":"0.70","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56","name":"xgboost-shap","marker":{"color":"rgba(201,148,199,1)","line":{"color":"rgba(201,148,199,1)"}},"textfont":{"color":"rgba(201,148,199,1)"},"error_y":{"color":"rgba(201,148,199,1)"},"error_x":{"color":"rgba(201,148,199,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.731547572016461],"text":"0.73","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","name":"aorsf-permute","marker":{"color":"rgba(223,101,176,1)","line":{"color":"rgba(223,101,176,1)"}},"textfont":{"color":"rgba(223,101,176,1)"},"error_y":{"color":"rgba(223,101,176,1)"},"error_x":{"color":"rgba(223,101,176,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.738628477366255],"text":"0.74","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","name":"aorsf-anova","marker":{"color":"rgba(221,28,119,1)","line":{"color":"rgba(221,28,119,1)"}},"textfont":{"color":"rgba(221,28,119,1)"},"error_y":{"color":"rgba(221,28,119,1)"},"error_x":{"color":"rgba(221,28,119,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.759151111111111],"text":"0.76","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","name":"aorsf-negate","marker":{"color":"rgba(152,0,67,1)","line":{"color":"rgba(152,0,67,1)"}},"textfont":{"color":"rgba(152,0,67,1)"},"error_y":{"color":"rgba(152,0,67,1)"},"error_x":{"color":"rgba(152,0,67,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -2582,6 +2562,13 @@ class: center, middle
 # .huge[BONUS ROUND]
 
 
+
+
+---
+
+## Censoring
+
+&lt;img src="img/ml-supervised-8.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2675,7 +2662,7 @@ as_tibble(pd)
 
 ## How do you use aorsf?
 
-&lt;img src="index_files/figure-html/unnamed-chunk-65-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-64-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 

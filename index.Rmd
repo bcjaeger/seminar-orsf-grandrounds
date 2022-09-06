@@ -803,14 +803,6 @@ Avoid the right side of every restaurant you enter? Overfitting.<sup>1</sup>
 .footnote[Assuming being on the left hand side of a room does not generally improve the taste of food.]
 
 ---
-
-```{r out.width='100%', echo=FALSE, fig.align='center'}
-knitr::include_graphics('img/ml_abstraction.svg')
-```
-
-.footnote[Basic steps of ML. Source: [mlr3book](https://mlr3book.mlr-org.com/basics.html)]
-
----
 class: center, middle, inverse
 
 # .huge[Decision Trees and Random Forests]
@@ -1083,14 +1075,6 @@ A common approach: _permutation_ importance<sup>1</sup>
 
 .footnote[<sup>1</sup>technical details are being omitted]
 
---
-
-**Assumptions**:
-
-Permuting an important predictor will hurt the forest's prediction accuracy.
-
-Permuting an unimportant predictor will not impact prediction accuracy. 
-
 ---
 
 ```{r}
@@ -1362,14 +1346,14 @@ tbl_data <- tribble(
 "Lasso Cox regression", "Black adults", "0.80",	
 "Ridge Cox regression", "Black adults", "0.81",	
 "Boosted Cox regression", "Black adults", "0.81",	
-"Boosted tree", "Black adults", "0.86",
+"Boosted trees", "Black adults", "0.86",
 "oRSF", "White adults", "0.89",	
 "oRSF with top 20 variables", "White adults", "0.88",	
 "Forward stepwise Cox regression", "White adults", "0.77",	
 "Lasso Cox regression", "White adults", "0.78",	
 "Ridge Cox regression", "White adults", "0.78",	
 "Boosted Cox regression", "White adults", "0.82",	
-"Boosted tree", "White adults", "0.87"
+"Boosted trees", "White adults", "0.87"
 ) %>% 
  pivot_wider(names_from = model, values_from = value)
 
