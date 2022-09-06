@@ -478,7 +478,7 @@ Visualization helps, but isn't always feasible and actionable
 
 --
 
-**Cross-validation**:
+**Cross validation**:
 
 - Hold some data out as a testing set
 
@@ -487,6 +487,8 @@ Visualization helps, but isn't always feasible and actionable
 - Predict the outcome using each model (one model per learner)
 
 - Evaluate prediction accuracy
+
+- _Repeat_
 
 ---
 
