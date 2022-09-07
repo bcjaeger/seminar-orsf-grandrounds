@@ -6,6 +6,8 @@
     <meta name="author" content="Byron C. Jaeger" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/xaringanExtra-banner-0.0.1/banner.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-banner-0.0.1/banner.js"></script>
     <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
     <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
     <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -29,6 +31,8 @@ class: center, middle, inverse, title-slide
 
 
 
+<script>document.addEventListener('DOMContentLoaded',function(){new xeBanner(JSON.parse('{"left":"","right":"Byron C Jaeger","exclude":["inverse"],"position":"top"}'))})</script>
+<script>document.addEventListener('DOMContentLoaded',function(){new xeBanner(JSON.parse('{"left":"byronjaeger.com/talk","exclude":["inverse"],"position":"bottom"}'))})</script>
 
 &lt;style type="text/css"&gt;
 .huge { font-size: 200% }
@@ -203,7 +207,6 @@ class: center, middle, inverse
 
 - .large[A recipe is not the same thing as the food!]
 
-
 ---
 layout: false 
 
@@ -226,28 +229,15 @@ layout: false
 
 ---
 
-## Learner 2: find the curve of best fit
+## Learner 2: Use a spline
 
 &lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Learner 2: find the curve of best fit
+## Learner 3: Loosen the spline
 
 &lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Learner 3: More curve
-
-&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Learner 3: More curve
-
-&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
-
 
 ---
 
@@ -273,38 +263,50 @@ Visualization helps, but isn't always feasible and actionable
 
 ## All our data
 
-&lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Select a testing set
 
-&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Take it away
 
-&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Apply learner 1
 
-&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 
 ## Apply learner 2
 
-&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 
 ## Apply learner 3
+
+&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Assess predictions in testing data
+
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Assess predictions in testing data
 
 &lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -313,18 +315,6 @@ Visualization helps, but isn't always feasible and actionable
 ## Assess predictions in testing data
 
 &lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Assess predictions in testing data
-
-&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Assess predictions in testing data
-
-&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
@@ -756,10 +746,10 @@ class: center, middle
     <tr><td class="gt_row gt_right gt_stub">Line</td>
 <td class="gt_row gt_center">0.41</td>
 <td class="gt_row gt_center">0.34</td></tr>
-    <tr><td class="gt_row gt_right gt_stub">Curve</td>
+    <tr><td class="gt_row gt_right gt_stub">Spline</td>
 <td class="gt_row gt_center">0.28</td>
 <td class="gt_row gt_center">0.22</td></tr>
-    <tr><td class="gt_row gt_right gt_stub">More curve</td>
+    <tr><td class="gt_row gt_right gt_stub">Loose spline</td>
 <td class="gt_row gt_center">0.27</td>
 <td class="gt_row gt_center">0.35</td></tr>
   </tbody>
@@ -772,21 +762,7 @@ class: center, middle
 
 ## Overfitting?
 
-Adopting a rule in your model that works well in your training data but does not generalize to new data.
-
---
-
-**Example**: Go to a restaurant twice, each time record how your meal tastes.
-
-1. You sit on the left side and the meal tastes wonderful
-
-1. You sit on the right side of the restaurant and the meal is less tasty.
-
---
-
-Avoid the right side of every restaurant you enter? Overfitting.&lt;sup&gt;1&lt;/sup&gt;
-
-.footnote[Assuming being on the left hand side of a room does not generally improve the taste of food.]
+.large[Adopting a rule in your model that works well in your training data but does not generalize to new data.]
 
 ---
 class: center, middle, inverse
@@ -816,19 +792,19 @@ We'll demonstrate the mechanics of decision trees by developing a prediction rul
 
 Dimensions for Adelie, Chinstrap and Gentoo Penguins at Palmer Station
 
-&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition all the penguins into flipper length &lt; 207 or ≥ 207 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 Partition penguins on the left side into into bill length &lt; 43 or ≥ 43 mm
 
-&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -842,23 +818,11 @@ Node text: Penguin species probabilities based on penguins in the leaf
 
 ## Random Forest, i.e., lots of trees
 
-Each tree is grown through a randomized process:
-
-- random sample (with replacement) of the training data
-
-- random subsets of variables are considered for each partition
-
---
+Each tree is grown through a randomized process so that the trees are somewhat independent from each other
 
 Each randomized tree is _individually weaker_ than a standard decision tree.
 
-but the average prediction taken across all the _weak learners_, i.e.,  
-
-$$
-\frac{\text{p}_1 + \cdots + \text{p}_n}{n}
-$$
-
-is **much** more accurate than a standard decision tree.
+The average prediction taken across all the randomized trees is **much** more accurate than a standard decision tree.
 
 
 
@@ -867,13 +831,13 @@ is **much** more accurate than a standard decision tree.
 
 Contours of predictions from **individual trees** in a random forest
 
-&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 The **ensemble** decision boundary from a random forest
 
-&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -899,26 +863,26 @@ A common approach: _permutation_ importance&lt;sup&gt;1&lt;/sup&gt;
 
 **Initial classification accuracy**: 0.96
 
-&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 **Demo**: permute 1 value of flipper length:
 
-&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 After permuting flipper length: 0.61, so importance of flipper length is 0.35
 
-&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 After permuting bill length: 0.63, so importance of bill length is 0.33
 
-&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
@@ -926,8 +890,7 @@ class: inverse, center, middle
 # .huge[Oblique random survival forest (oRSF)]
 
 ---
-
-Decision tree's prediction = average of the observations in your leaf
+## Survival trees 
 
 &lt;img src="img/rpart_plot_classif.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -941,15 +904,15 @@ With survival trees, the 'average of the observations' is a survival curve.
 
 ---
 
-oblique trees use linear combinations of variables to partition data.
+Oblique trees use linear combinations of variables to partition data.
 
 - axis based split: `\(x_1 &lt; 10\)`
 
 - oblique split: `\(0.25 \cdot x_1 + 1.5 \cdot x_2 &lt; 10\)`
 
-&lt;img src="img/axis_versus_oblique.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/axis_versus_oblique.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-Both trees partition the predictor space defined by variables `\(x_1\)` and `\(x_2\)`, but the oblique splits do a better job of separating the two classes.
+Both trees partition the predictor space defined by variables `\(x_1\)` and `\(x_2\)`, but the oblique splits do a better job of separating the two classes. Unfortunately, finding an ideal oblique split is very computational
 
 ---
 class: center, middle, inverse
@@ -978,13 +941,22 @@ class: center, middle, inverse
 
 - .large[Fewer serious adverse events]
 
---
+---
+
+## Prediction accuracy
+
 
 .large[__Prediction accuracy metric__: C-statistic (aka C-index) 😒]
 
-&lt;!-- --- --&gt;
-&lt;!-- background-image: url(img/meme_chicken_ml.jpg) --&gt;
-&lt;!-- background-size: contain --&gt;
+- .large[Defn: Probability of assigning higher risk to a patient who will versus will not have an event]
+
+--
+
+.large[Can machine learning improve clinical risk prediction by improving the C-statistic?]
+
+---
+background-image: url(img/meme_chicken_ml.jpg)
+background-size: 65%
 
 ---
 background-image: url(img/segar_et_al.svg)
@@ -994,17 +966,10 @@ background-size: 90%
 background-image: url(img/segar_et_al_1.svg)
 background-size: 90%
 
----
-background-image: url(img/segar_et_al_2.svg)
-background-size: 90%
 
 ---
-background-image: url(img/segar_et_al_3.svg)
+background-image: url(img/segar_et_al_2-a.svg)
 background-size: 90%
-
----
-background-image: url(img/segar_flowchart.jpg)
-background-size: 80%
 
 ---
 class: middle
@@ -1466,6 +1431,10 @@ Discrimination of **learners** for predicting 10-Year risk of developing heart f
 
 
 ---
+background-image: url(img/segar_et_al_2-b.svg)
+background-size: 90%
+
+---
 class: middle
 
 Discrimination and calibration of **models** for predicting 10-Year risk of developing heart failure in the **external validation cohorts among black adults**
@@ -1887,60 +1856,54 @@ Discrimination and calibration of **models** for predicting 10-Year risk of deve
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1">Model</th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
         <span class="gt_column_spanner">ARIC</span>
       </th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
         <span class="gt_column_spanner">MESA/DHS</span>
       </th>
     </tr>
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">P-difference</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">P-difference</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
     <tr><td class="gt_row gt_right gt_stub">oRSF</td>
 <td class="gt_row gt_center">0.80</td>
-<td class="gt_row gt_center">0.26</td>
 <td class="gt_row gt_center">Ref</td>
 <td class="gt_row gt_center">0.83</td>
-<td class="gt_row gt_center">0.17</td>
 <td class="gt_row gt_center">Ref</td></tr>
     <tr><td class="gt_row gt_right gt_stub">ARIC-HF risk score</td>
 <td class="gt_row gt_center">0.77</td>
-<td class="gt_row gt_center">0.35</td>
 <td class="gt_row gt_center">&lt;0.001</td>
 <td class="gt_row gt_center">0.80</td>
-<td class="gt_row gt_center">&lt;0.001</td>
 <td class="gt_row gt_center">0.01</td></tr>
     <tr><td class="gt_row gt_right gt_stub">PCP-HF risk score</td>
 <td class="gt_row gt_center">0.73</td>
-<td class="gt_row gt_center">0.07</td>
 <td class="gt_row gt_center">&lt;0.001</td>
 <td class="gt_row gt_center">0.75</td>
-<td class="gt_row gt_center">0.04</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_right gt_stub">MESA-HF risk score</td>
 <td class="gt_row gt_center">0.72</td>
-<td class="gt_row gt_center">0.55</td>
 <td class="gt_row gt_center">&lt;0.001</td>
 <td class="gt_row gt_center">0.78</td>
-<td class="gt_row gt_center">0.54</td>
 <td class="gt_row gt_center">0.006</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="7">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
+      <td class="gt_sourcenote" colspan="5">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
     </tr>
   </tfoot>
   
 </table>
 </div>
+
+---
+background-image: url(img/segar_et_al_3-b.svg)
+background-size: 90%
 
 ---
 class: middle
@@ -2365,31 +2328,26 @@ Discrimination and calibration of **models** for predicting 10-year risk of deve
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Model</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">P-difference</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
     <tr><td class="gt_row gt_right gt_stub">oRSF</td>
 <td class="gt_row gt_center">0.82</td>
-<td class="gt_row gt_center">0.27</td>
 <td class="gt_row gt_center">Ref</td></tr>
     <tr><td class="gt_row gt_right gt_stub">ARIC-HF risk score</td>
 <td class="gt_row gt_center">0.79</td>
-<td class="gt_row gt_center">0.001</td>
 <td class="gt_row gt_center">0.008</td></tr>
     <tr><td class="gt_row gt_right gt_stub">PCP-HF risk score</td>
 <td class="gt_row gt_center">0.75</td>
-<td class="gt_row gt_center">0.01</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_right gt_stub">MESA-HF risk score</td>
 <td class="gt_row gt_center">0.80</td>
-<td class="gt_row gt_center">0.40</td>
 <td class="gt_row gt_center">0.044</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="4">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
+      <td class="gt_sourcenote" colspan="3">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
     </tr>
   </tfoot>
   
@@ -2420,13 +2378,13 @@ class: center, middle, inverse
 
 ## initial software: obliqueRSF
 
-&lt;img src="index_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## new software: aorsf
+## New software: aorsf
 
-&lt;img src="index_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -2520,7 +2478,7 @@ See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 
 ## Prediction benchmark
 
-&lt;img src="index_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -2543,11 +2501,15 @@ See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 ## Importance benchmark
 
 <div id="htmlwidget-a190c3c1d0898e142789" style="width:800px;height:500px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a190c3c1d0898e142789">{"x":{"visdat":{"4fe49fc2cda":["function () ","plotlyVisDat"]},"cur_data":"4fe49fc2cda","attrs":{"4fe49fc2cda":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","x":1,"y":[0.738628477366255,0.759151111111111,0.731547572016461,0.677470452674897,0.646197199818852,0.696268395061728],"color":["aorsf-anova","aorsf-negate","aorsf-permute","rfsrc-permutation","xgboost-gain","xgboost-shap"],"colors":"PuRd","text":["0.74","0.76","0.73","0.68","0.65","0.70"],"textposition":"outside","hoverinfo":"text","hovertext":["aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56"],"inherit":true}},"layout":{"width":800,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"C-statistic for variable selection","range":[0.5,0.8]},"xaxis":{"domain":[0,1],"automargin":true,"title":"","visible":false},"legend":{"title":{"text":"<b>VI technique<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"bar","x":[1],"y":[0.646197199818852],"text":"0.65","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","name":"xgboost-gain","marker":{"color":"rgba(241,238,246,1)","line":{"color":"rgba(241,238,246,1)"}},"textfont":{"color":"rgba(241,238,246,1)"},"error_y":{"color":"rgba(241,238,246,1)"},"error_x":{"color":"rgba(241,238,246,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.677470452674897],"text":"0.68","textposition":"outside","hoverinfo":"text","hovertext":"rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","name":"rfsrc-permutation","marker":{"color":"rgba(212,185,218,1)","line":{"color":"rgba(212,185,218,1)"}},"textfont":{"color":"rgba(212,185,218,1)"},"error_y":{"color":"rgba(212,185,218,1)"},"error_x":{"color":"rgba(212,185,218,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.696268395061728],"text":"0.70","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56","name":"xgboost-shap","marker":{"color":"rgba(201,148,199,1)","line":{"color":"rgba(201,148,199,1)"}},"textfont":{"color":"rgba(201,148,199,1)"},"error_y":{"color":"rgba(201,148,199,1)"},"error_x":{"color":"rgba(201,148,199,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.731547572016461],"text":"0.73","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","name":"aorsf-permute","marker":{"color":"rgba(223,101,176,1)","line":{"color":"rgba(223,101,176,1)"}},"textfont":{"color":"rgba(223,101,176,1)"},"error_y":{"color":"rgba(223,101,176,1)"},"error_x":{"color":"rgba(223,101,176,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.738628477366255],"text":"0.74","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","name":"aorsf-anova","marker":{"color":"rgba(221,28,119,1)","line":{"color":"rgba(221,28,119,1)"}},"textfont":{"color":"rgba(221,28,119,1)"},"error_y":{"color":"rgba(221,28,119,1)"},"error_x":{"color":"rgba(221,28,119,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.759151111111111],"text":"0.76","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","name":"aorsf-negate","marker":{"color":"rgba(152,0,67,1)","line":{"color":"rgba(152,0,67,1)"}},"textfont":{"color":"rgba(152,0,67,1)"},"error_y":{"color":"rgba(152,0,67,1)"},"error_x":{"color":"rgba(152,0,67,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-a190c3c1d0898e142789">{"x":{"visdat":{"9fa05d3564ed":["function () ","plotlyVisDat"]},"cur_data":"9fa05d3564ed","attrs":{"9fa05d3564ed":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","x":1,"y":[0.738628477366255,0.759151111111111,0.731547572016461,0.677470452674897,0.646197199818852,0.696268395061728],"color":["aorsf-anova","aorsf-negate","aorsf-permute","rfsrc-permutation","xgboost-gain","xgboost-shap"],"colors":"PuRd","text":["0.74","0.76","0.73","0.68","0.65","0.70"],"textposition":"outside","hoverinfo":"text","hovertext":["aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56"],"inherit":true}},"layout":{"width":800,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"C-statistic for variable selection","range":[0.5,0.8]},"xaxis":{"domain":[0,1],"automargin":true,"title":"","visible":false},"legend":{"title":{"text":"<b>VI technique<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"bar","x":[1],"y":[0.646197199818852],"text":"0.65","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-gain<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.60<br>Combination effect: 0.65<br>Interactions:<br>   w/main effect: 0.57<br>   w/non-linear effect: 0.39<br>   w/combination effect: 0.51","name":"xgboost-gain","marker":{"color":"rgba(241,238,246,1)","line":{"color":"rgba(241,238,246,1)"}},"textfont":{"color":"rgba(241,238,246,1)"},"error_y":{"color":"rgba(241,238,246,1)"},"error_x":{"color":"rgba(241,238,246,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.677470452674897],"text":"0.68","textposition":"outside","hoverinfo":"text","hovertext":"rfsrc-permutation<br>Mean computation time: 49 seconds<br>C-statistic by variable class:<br>Main effect: 0.83<br>Non-linear effect: 0.62<br>Combination effect: 0.68<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.59","name":"rfsrc-permutation","marker":{"color":"rgba(212,185,218,1)","line":{"color":"rgba(212,185,218,1)"}},"textfont":{"color":"rgba(212,185,218,1)"},"error_y":{"color":"rgba(212,185,218,1)"},"error_x":{"color":"rgba(212,185,218,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.696268395061728],"text":"0.70","textposition":"outside","hoverinfo":"text","hovertext":"xgboost-shap<br>Mean computation time: 24 seconds<br>C-statistic by variable class:<br>Main effect: 0.85<br>Non-linear effect: 0.66<br>Combination effect: 0.71<br>Interactions:<br>   w/main effect: 0.61<br>   w/non-linear effect: 0.46<br>   w/combination effect: 0.56","name":"xgboost-shap","marker":{"color":"rgba(201,148,199,1)","line":{"color":"rgba(201,148,199,1)"}},"textfont":{"color":"rgba(201,148,199,1)"},"error_y":{"color":"rgba(201,148,199,1)"},"error_x":{"color":"rgba(201,148,199,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.731547572016461],"text":"0.73","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-permute<br>Mean computation time: 45 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.68<br>Combination effect: 0.75<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.52<br>   w/combination effect: 0.61","name":"aorsf-permute","marker":{"color":"rgba(223,101,176,1)","line":{"color":"rgba(223,101,176,1)"}},"textfont":{"color":"rgba(223,101,176,1)"},"error_y":{"color":"rgba(223,101,176,1)"},"error_x":{"color":"rgba(223,101,176,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.738628477366255],"text":"0.74","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-anova<br>Mean computation time: 4.4 seconds<br>C-statistic by variable class:<br>Main effect: 0.89<br>Non-linear effect: 0.69<br>Combination effect: 0.76<br>Interactions:<br>   w/main effect: 0.60<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.60","name":"aorsf-anova","marker":{"color":"rgba(221,28,119,1)","line":{"color":"rgba(221,28,119,1)"}},"textfont":{"color":"rgba(221,28,119,1)"},"error_y":{"color":"rgba(221,28,119,1)"},"error_x":{"color":"rgba(221,28,119,1)"},"xaxis":"x","yaxis":"y","frame":null},{"type":"bar","x":[1],"y":[0.759151111111111],"text":"0.76","textposition":"outside","hoverinfo":"text","hovertext":"aorsf-negate<br>Mean computation time: 41 seconds<br>C-statistic by variable class:<br>Main effect: 0.91<br>Non-linear effect: 0.72<br>Combination effect: 0.78<br>Interactions:<br>   w/main effect: 0.62<br>   w/non-linear effect: 0.51<br>   w/combination effect: 0.61","name":"aorsf-negate","marker":{"color":"rgba(152,0,67,1)","line":{"color":"rgba(152,0,67,1)"}},"textfont":{"color":"rgba(152,0,67,1)"},"error_y":{"color":"rgba(152,0,67,1)"},"error_x":{"color":"rgba(152,0,67,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 ---
 
-# Acknowledments 
+# Conclusion &amp; Acknowledments 
+
+1. These experiments suggest the oRSF learner can generate very accurate risk prediction models.
+
+2. Developing infrastructure that makes oRSF faster, friendlier, and more interpretable can improve its viability for clinical risk prediction. Faster software and negation importance is a great start.
 
 This research was supported by the Center for Biomedical Informatics, Wake Forest University School of Medicine and the National Center for Advancing Translational Sciences (NCATS), National Institutes of Health, through Grant Award Number UL1TR001420. The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH. 
 
@@ -2565,13 +2527,942 @@ class: center, middle
 
 
 
-
 ---
 
 ## Censoring
 
 &lt;img src="img/ml-supervised-8.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
+---
+class: middle
+
+Discrimination and calibration of **models** for predicting 10-Year risk of developing heart failure in the **external validation cohorts among black adults**
+
+<div id="oziuttting" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#oziuttting .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oziuttting .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oziuttting .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oziuttting .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oziuttting .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oziuttting .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oziuttting .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oziuttting .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oziuttting .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oziuttting .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oziuttting .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oziuttting .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oziuttting .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oziuttting .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oziuttting .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oziuttting .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oziuttting .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oziuttting .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#oziuttting .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#oziuttting .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oziuttting .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#oziuttting .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#oziuttting .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oziuttting .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oziuttting .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oziuttting .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oziuttting .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oziuttting .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oziuttting .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oziuttting .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oziuttting .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oziuttting .gt_left {
+  text-align: left;
+}
+
+#oziuttting .gt_center {
+  text-align: center;
+}
+
+#oziuttting .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oziuttting .gt_font_normal {
+  font-weight: normal;
+}
+
+#oziuttting .gt_font_bold {
+  font-weight: bold;
+}
+
+#oziuttting .gt_font_italic {
+  font-style: italic;
+}
+
+#oziuttting .gt_super {
+  font-size: 65%;
+}
+
+#oziuttting .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#oziuttting .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#oziuttting .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#oziuttting .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#oziuttting .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#oziuttting .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1">Model</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner">ARIC</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner">MESA/DHS</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right gt_stub">oRSF</td>
+<td class="gt_row gt_center">0.80</td>
+<td class="gt_row gt_center">0.26</td>
+<td class="gt_row gt_center">Ref</td>
+<td class="gt_row gt_center">0.83</td>
+<td class="gt_row gt_center">0.17</td>
+<td class="gt_row gt_center">Ref</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">ARIC-HF risk score</td>
+<td class="gt_row gt_center">0.77</td>
+<td class="gt_row gt_center">0.35</td>
+<td class="gt_row gt_center">&lt;0.001</td>
+<td class="gt_row gt_center">0.80</td>
+<td class="gt_row gt_center">&lt;0.001</td>
+<td class="gt_row gt_center">0.01</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">PCP-HF risk score</td>
+<td class="gt_row gt_center">0.73</td>
+<td class="gt_row gt_center">0.07</td>
+<td class="gt_row gt_center">&lt;0.001</td>
+<td class="gt_row gt_center">0.75</td>
+<td class="gt_row gt_center">0.04</td>
+<td class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">MESA-HF risk score</td>
+<td class="gt_row gt_center">0.72</td>
+<td class="gt_row gt_center">0.55</td>
+<td class="gt_row gt_center">&lt;0.001</td>
+<td class="gt_row gt_center">0.78</td>
+<td class="gt_row gt_center">0.54</td>
+<td class="gt_row gt_center">0.006</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="7">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+---
+class: middle
+
+Discrimination and calibration of **models** for predicting 10-year risk of developing heart failure in the **external validation cohorts (MESA &amp; DHS) among white adults**
+
+<div id="twocrfkwcs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#twocrfkwcs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#twocrfkwcs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#twocrfkwcs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#twocrfkwcs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#twocrfkwcs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#twocrfkwcs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#twocrfkwcs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#twocrfkwcs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#twocrfkwcs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#twocrfkwcs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#twocrfkwcs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#twocrfkwcs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#twocrfkwcs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#twocrfkwcs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#twocrfkwcs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#twocrfkwcs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#twocrfkwcs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#twocrfkwcs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#twocrfkwcs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#twocrfkwcs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#twocrfkwcs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#twocrfkwcs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#twocrfkwcs .gt_left {
+  text-align: left;
+}
+
+#twocrfkwcs .gt_center {
+  text-align: center;
+}
+
+#twocrfkwcs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#twocrfkwcs .gt_font_normal {
+  font-weight: normal;
+}
+
+#twocrfkwcs .gt_font_bold {
+  font-weight: bold;
+}
+
+#twocrfkwcs .gt_font_italic {
+  font-style: italic;
+}
+
+#twocrfkwcs .gt_super {
+  font-size: 65%;
+}
+
+#twocrfkwcs .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#twocrfkwcs .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#twocrfkwcs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#twocrfkwcs .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#twocrfkwcs .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#twocrfkwcs .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Model</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">C-statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GND P-value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">DeLong test P-value</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right gt_stub">oRSF</td>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">0.27</td>
+<td class="gt_row gt_center">Ref</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">ARIC-HF risk score</td>
+<td class="gt_row gt_center">0.79</td>
+<td class="gt_row gt_center">0.001</td>
+<td class="gt_row gt_center">0.008</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">PCP-HF risk score</td>
+<td class="gt_row gt_center">0.75</td>
+<td class="gt_row gt_center">0.01</td>
+<td class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">MESA-HF risk score</td>
+<td class="gt_row gt_center">0.80</td>
+<td class="gt_row gt_center">0.40</td>
+<td class="gt_row gt_center">0.044</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4">ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
 
 ---
 
@@ -2599,7 +3490,7 @@ Cindex(with(mesa, Surv(time_hf, censor_hf)),
 
 ```
 ##  C index 
-## 0.830831
+## 0.829693
 ```
 
 ---
@@ -2613,16 +3504,16 @@ enframe(orsf_vi(fit))
 ## # A tibble: 27 x 2
 ##    name       value
 ##    &lt;chr&gt;      &lt;dbl&gt;
-##  1 NTproBNP 0.0154 
-##  2 Age      0.0149 
-##  3 Smoking  0.00558
-##  4 BMI      0.00469
-##  5 FPG      0.00374
-##  6 CRP      0.00373
-##  7 SBP      0.00316
-##  8 HDL      0.00288
-##  9 Sex      0.00282
-## 10 CHF      0.00268
+##  1 NTproBNP 0.0135 
+##  2 Age      0.0135 
+##  3 Smoking  0.00544
+##  4 FPG      0.00529
+##  5 CRP      0.00278
+##  6 CHF      0.00276
+##  7 BMI      0.00276
+##  8 SBP      0.00213
+##  9 HDL      0.00193
+## 10 QRS      0.00176
 ## # ... with 17 more rows
 ```
 

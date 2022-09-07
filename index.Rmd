@@ -52,6 +52,16 @@ source("R/bench_pred_viz.R")
 
 ```
 
+```{r xaringan-banner, echo=FALSE}
+
+xaringanExtra::use_banner(
+ top_left = "",
+ top_right = "Byron C Jaeger",
+ bottom_left = "byronjaeger.com/talk",
+ exclude = c("inverse")
+)
+
+```
 
 ```{css, echo = FALSE}
 .huge { font-size: 200% }
@@ -250,7 +260,6 @@ class: center, middle, inverse
 
 - .large[A recipe is not the same thing as the food!]
 
-
 ---
 layout: false 
 
@@ -364,7 +373,7 @@ p + points_light +
 
 ---
 
-## Learner 2: find the curve of best fit
+## Learner 2: Use a spline
 
 ```{r}
 
@@ -377,48 +386,7 @@ p + points +
 
 ---
 
-## Learner 2: find the curve of best fit
-
-```{r}
-
-circle_data <- tibble(
- x = 120,
- y = predict(m2, newdata = tibble(x=x)),
- label = paste("Our model's prediction\nfor Bill:", 
-               round(y, 1), 'months')
-)
-
-p + points_light + 
- geom_line(data = tibble(y = yhat_m2, x = x_new$x),
-              color = 'purple', 
-              size = 1.5) + 
- geom_mark_circle(data = circle_data, 
-                  aes(label = label), 
-                  fill = 'orange', 
-                  label.fontsize = 15,
-                  expand = 0.02, 
-                  label.fill = 'grey90') + 
- geom_segment(x = 120, 
-              y = 2, 
-              xend = 120, 
-              yend = 4.7) + 
- annotate(geom = 'text',
-          size = 6,
-          x = 113,
-          y = 1.5, 
-          label = "Bill's SBP:\n120 mm Hg") +
- annotation_raster(raster, 
-                   ymin = -2.2, 
-                   ymax = 2, 
-                   xmin = 115, 
-                   xmax = 125)
- 
- 
-```
-
----
-
-## Learner 3: More curve
+## Learner 3: Loosen the spline
 
 ```{r}
 
@@ -428,47 +396,6 @@ p + points +
            size = 1.5)
 
 ```
-
----
-
-## Learner 3: More curve
-
-```{r}
-
-circle_data <- tibble(
- x = 120,
- y = predict(m3, newdata = tibble(x=x)),
- label = paste("Our model's prediction\nfor Bill:", 
-               round(y, 1), 'months')
-)
-
-p + points_light + 
- geom_line(data = tibble(y = yhat_m3, x = x_new$x),
-              color = 'purple', 
-              size = 1.5) + 
- geom_mark_circle(data = circle_data, 
-                  aes(label = label), 
-                  fill = 'orange', 
-                  label.fontsize = 15,
-                  expand = 0.02, 
-                  label.fill = 'grey90') + 
- geom_segment(x = 120, 
-              y = 2, 
-              xend = 120, 
-              yend = 4.7) + 
- annotate(geom = 'text',
-          size = 6,
-          x = 113,
-          y = 1.5, 
-          label = "Bill's SBP:\n120 mm Hg") +
- annotation_raster(raster, 
-                   ymin = -2.2, 
-                   ymax = 2, 
-                   xmin = 115, 
-                   xmax = 125)
- 
-```
-
 
 ---
 
@@ -759,8 +686,8 @@ bind_rows(train = train_error,
           .id = 'data') %>% 
  mutate(model = recode(model,
                        m1 = "Line",
-                       m2 = "Curve",
-                       m3 = "More curve")) %>% 
+                       m2 = "Spline",
+                       m3 = "Loose spline")) %>% 
  mutate(
   rmse = table_value(rmse),
   rsq = table_glue("{100 * rsq}%")
@@ -788,21 +715,7 @@ bind_rows(train = train_error,
 
 ## Overfitting?
 
-Adopting a rule in your model that works well in your training data but does not generalize to new data.
-
---
-
-**Example**: Go to a restaurant twice, each time record how your meal tastes.
-
-1. You sit on the left side and the meal tastes wonderful
-
-1. You sit on the right side of the restaurant and the meal is less tasty.
-
---
-
-Avoid the right side of every restaurant you enter? Overfitting.<sup>1</sup>
-
-.footnote[Assuming being on the left hand side of a room does not generally improve the taste of food.]
+.large[Adopting a rule in your model that works well in your training data but does not generalize to new data.]
 
 ---
 class: center, middle, inverse
@@ -949,23 +862,11 @@ Node text: Penguin species probabilities based on penguins in the leaf
 
 ## Random Forest, i.e., lots of trees
 
-Each tree is grown through a randomized process:
-
-- random sample (with replacement) of the training data
-
-- random subsets of variables are considered for each partition
-
---
+Each tree is grown through a randomized process so that the trees are somewhat independent from each other
 
 Each randomized tree is _individually weaker_ than a standard decision tree.
 
-but the average prediction taken across all the _weak learners_, i.e.,  
-
-$$
-\frac{\text{p}_1 + \cdots + \text{p}_n}{n}
-$$
-
-is **much** more accurate than a standard decision tree.
+The average prediction taken across all the randomized trees is **much** more accurate than a standard decision tree.
 
 ```{r}
 
@@ -1204,8 +1105,7 @@ class: inverse, center, middle
 # .huge[Oblique random survival forest (oRSF)]
 
 ---
-
-Decision tree's prediction = average of the observations in your leaf
+## Survival trees 
 
 ```{r fig.align='center', out.width='100%'}
 
@@ -1266,17 +1166,17 @@ knitr::include_graphics('img/rpart_plot_surv.png')
 
 ---
 
-oblique trees use linear combinations of variables to partition data.
+Oblique trees use linear combinations of variables to partition data.
 
 - axis based split: $x_1 < 10$
 
 - oblique split: $0.25 \cdot x_1 + 1.5 \cdot x_2 < 10$
 
-```{r out.width='100%'}
+```{r out.width='90%'}
 knitr::include_graphics("img/axis_versus_oblique.png")
 ```
 
-Both trees partition the predictor space defined by variables $x_1$ and $x_2$, but the oblique splits do a better job of separating the two classes.
+Both trees partition the predictor space defined by variables $x_1$ and $x_2$, but the oblique splits do a better job of separating the two classes. Unfortunately, finding an ideal oblique split is very computational
 
 ---
 class: center, middle, inverse
@@ -1305,13 +1205,22 @@ class: center, middle, inverse
 
 - .large[Fewer serious adverse events]
 
---
+---
+
+## Prediction accuracy
+
 
 .large[__Prediction accuracy metric__: C-statistic (aka C-index) 😒]
 
-<!-- --- -->
-<!-- background-image: url(img/meme_chicken_ml.jpg) -->
-<!-- background-size: contain -->
+- .large[Defn: Probability of assigning higher risk to a patient who will versus will not have an event]
+
+--
+
+.large[Can machine learning improve clinical risk prediction by improving the C-statistic?]
+
+---
+background-image: url(img/meme_chicken_ml.jpg)
+background-size: 65%
 
 ---
 background-image: url(img/segar_et_al.svg)
@@ -1321,17 +1230,10 @@ background-size: 90%
 background-image: url(img/segar_et_al_1.svg)
 background-size: 90%
 
----
-background-image: url(img/segar_et_al_2.svg)
-background-size: 90%
 
 ---
-background-image: url(img/segar_et_al_3.svg)
+background-image: url(img/segar_et_al_2-a.svg)
 background-size: 90%
-
----
-background-image: url(img/segar_flowchart.jpg)
-background-size: 80%
 
 ---
 class: middle
@@ -1343,19 +1245,19 @@ Discrimination of **learners** for predicting 10-Year risk of developing heart f
 tbl_data <- tribble(
  ~model, ~race, ~value,
  "oRSF", "Black adults", "0.88",	
-"oRSF with top 20 variables", "Black adults", "0.88",	
-"Forward stepwise Cox regression", "Black adults", "0.76",	
-"Lasso Cox regression", "Black adults", "0.80",	
-"Ridge Cox regression", "Black adults", "0.81",	
-"Boosted Cox regression", "Black adults", "0.81",	
-"Boosted trees", "Black adults", "0.86",
-"oRSF", "White adults", "0.89",	
-"oRSF with top 20 variables", "White adults", "0.88",	
-"Forward stepwise Cox regression", "White adults", "0.77",	
-"Lasso Cox regression", "White adults", "0.78",	
-"Ridge Cox regression", "White adults", "0.78",	
-"Boosted Cox regression", "White adults", "0.82",	
-"Boosted trees", "White adults", "0.87"
+ "oRSF with top 20 variables", "Black adults", "0.88",	
+ "Forward stepwise Cox regression", "Black adults", "0.76",	
+ "Lasso Cox regression", "Black adults", "0.80",	
+ "Ridge Cox regression", "Black adults", "0.81",	
+ "Boosted Cox regression", "Black adults", "0.81",	
+ "Boosted trees", "Black adults", "0.86",
+ "oRSF", "White adults", "0.89",	
+ "oRSF with top 20 variables", "White adults", "0.88",	
+ "Forward stepwise Cox regression", "White adults", "0.77",	
+ "Lasso Cox regression", "White adults", "0.78",	
+ "Ridge Cox regression", "White adults", "0.78",	
+ "Boosted Cox regression", "White adults", "0.82",	
+ "Boosted trees", "White adults", "0.87"
 ) %>% 
  pivot_wider(names_from = model, values_from = value)
 
@@ -1371,6 +1273,10 @@ gt(tbl_data, rowname_col = 'race') %>%
 
 
 ---
+background-image: url(img/segar_et_al_2-b.svg)
+background-size: 90%
+
+---
 class: middle
 
 Discrimination and calibration of **models** for predicting 10-Year risk of developing heart failure in the **external validation cohorts among black adults**
@@ -1382,29 +1288,21 @@ Discrimination and calibration of **models** for predicting 10-Year risk of deve
 tribble(
  ~cohort, ~model, ~colname, ~value,
  "ARIC", "oRSF",	"C-statistic", "0.80",	
- "ARIC", "oRSF",	"GND P-value", "0.26",
- "ARIC", "oRSF",	"DeLong test P-value", "Ref",
+ "ARIC", "oRSF",	"P-difference", "Ref",
  "MESA/DHS", "oRSF",	"C-statistic", "0.83",
- "MESA/DHS", "oRSF",	"GND P-value", "0.17",
- "MESA/DHS", "oRSF",	"DeLong test P-value", "Ref",
+ "MESA/DHS", "oRSF",	"P-difference", "Ref",
  "ARIC", "ARIC-HF risk score", "C-statistic",	"0.77",
- "ARIC", "ARIC-HF risk score", "GND P-value",	"0.35",
- "ARIC", "ARIC-HF risk score", "DeLong test P-value",	"<0.001",
+ "ARIC", "ARIC-HF risk score", "P-difference",	"<0.001",
  "MESA/DHS", "ARIC-HF risk score", "C-statistic",	"0.80",
- "MESA/DHS", "ARIC-HF risk score", "GND P-value",	"<0.001",
- "MESA/DHS", "ARIC-HF risk score", "DeLong test P-value",	"0.01",
+ "MESA/DHS", "ARIC-HF risk score", "P-difference",	"0.01",
  "ARIC", "PCP-HF risk score", "C-statistic", "0.73",
- "ARIC", "PCP-HF risk score", "GND P-value", "0.07",
- "ARIC", "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "ARIC", "PCP-HF risk score", "P-difference", "<0.001",
  "MESA/DHS", "PCP-HF risk score", "C-statistic", "0.75",
- "MESA/DHS", "PCP-HF risk score", "GND P-value", "0.04",
- "MESA/DHS", "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "MESA/DHS", "PCP-HF risk score", "P-difference", "<0.001",
  "ARIC", "MESA-HF risk score", "C-statistic", "0.72",
- "ARIC", "MESA-HF risk score", "GND P-value", "0.55",
- "ARIC", "MESA-HF risk score", "DeLong test P-value", "<0.001",
+ "ARIC", "MESA-HF risk score", "P-difference", "<0.001",
  "MESA/DHS", "MESA-HF risk score", "C-statistic", "0.78",
- "MESA/DHS", "MESA-HF risk score", "GND P-value", "0.54",
- "MESA/DHS", "MESA-HF risk score", "DeLong test P-value", "0.006"
+ "MESA/DHS", "MESA-HF risk score", "P-difference", "0.006"
 ) %>% 
  pivot_wider(names_from = c(cohort, colname), values_from = value) %>% 
  gt(rowname_col = 'model') %>% 
@@ -1412,10 +1310,14 @@ tribble(
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
  )
 
 ```
+
+---
+background-image: url(img/segar_et_al_3-b.svg)
+background-size: 90%
 
 ---
 class: middle
@@ -1429,24 +1331,20 @@ Discrimination and calibration of **models** for predicting 10-year risk of deve
 tribble(
  ~ model, ~colname, ~value,
  "oRSF", "C-statistic", "0.82",
- "oRSF", "GND P-value", "0.27",
- "oRSF", "DeLong test P-value", "Ref",
+ "oRSF", "P-difference", "Ref",
  "ARIC-HF risk score",	"C-statistic", "0.79",
- "ARIC-HF risk score",	"GND P-value", "0.001",
- "ARIC-HF risk score",	"DeLong test P-value", "0.008",
+ "ARIC-HF risk score",	"P-difference", "0.008",
  "PCP-HF risk score", "C-statistic", "0.75",
- "PCP-HF risk score", "GND P-value", "0.01",
- "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "PCP-HF risk score", "P-difference", "<0.001",
  "MESA-HF risk score", "C-statistic", "0.80",
- "MESA-HF risk score", "GND P-value", "0.40",
- "MESA-HF risk score", "DeLong test P-value", "0.044"
+ "MESA-HF risk score", "P-difference", "0.044"
 ) %>% 
  pivot_wider(names_from = c(colname), values_from = value) %>% 
  gt(rowname_col = 'model') %>% 
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
  )
 
 
@@ -1706,7 +1604,7 @@ figs_time$slide_one
 
 ---
 
-## new software: aorsf
+## New software: aorsf
 
 ```{r}
 figs_time$slide_two
@@ -2027,7 +1925,11 @@ fig
 
 ---
 
-# Acknowledments 
+# Conclusion & Acknowledments 
+
+1. These experiments suggest the oRSF learner can generate very accurate risk prediction models.
+
+2. Developing infrastructure that makes oRSF faster, friendlier, and more interpretable can improve its viability for clinical risk prediction. Faster software and negation importance is a great start.
 
 This research was supported by the Center for Biomedical Informatics, Wake Forest University School of Medicine and the National Center for Advancing Translational Sciences (NCATS), National Institutes of Health, through Grant Award Number UL1TR001420. The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH. 
 
@@ -2073,7 +1975,6 @@ library(SurvMetrics)
 
 ```
 
-
 ---
 
 ## Censoring
@@ -2082,6 +1983,89 @@ library(SurvMetrics)
 knitr::include_graphics('img/ml-supervised-8.svg')
 ```
 
+---
+class: middle
+
+Discrimination and calibration of **models** for predicting 10-Year risk of developing heart failure in the **external validation cohorts among black adults**
+
+```{r}
+
+# Black adults
+
+tribble(
+ ~cohort, ~model, ~colname, ~value,
+ "ARIC", "oRSF",	"C-statistic", "0.80",	
+ "ARIC", "oRSF",	"GND P-value", "0.26",
+ "ARIC", "oRSF",	"DeLong test P-value", "Ref",
+ "MESA/DHS", "oRSF",	"C-statistic", "0.83",
+ "MESA/DHS", "oRSF",	"GND P-value", "0.17",
+ "MESA/DHS", "oRSF",	"DeLong test P-value", "Ref",
+ "ARIC", "ARIC-HF risk score", "C-statistic",	"0.77",
+ "ARIC", "ARIC-HF risk score", "GND P-value",	"0.35",
+ "ARIC", "ARIC-HF risk score", "DeLong test P-value",	"<0.001",
+ "MESA/DHS", "ARIC-HF risk score", "C-statistic",	"0.80",
+ "MESA/DHS", "ARIC-HF risk score", "GND P-value",	"<0.001",
+ "MESA/DHS", "ARIC-HF risk score", "DeLong test P-value",	"0.01",
+ "ARIC", "PCP-HF risk score", "C-statistic", "0.73",
+ "ARIC", "PCP-HF risk score", "GND P-value", "0.07",
+ "ARIC", "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "MESA/DHS", "PCP-HF risk score", "C-statistic", "0.75",
+ "MESA/DHS", "PCP-HF risk score", "GND P-value", "0.04",
+ "MESA/DHS", "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "ARIC", "MESA-HF risk score", "C-statistic", "0.72",
+ "ARIC", "MESA-HF risk score", "GND P-value", "0.55",
+ "ARIC", "MESA-HF risk score", "DeLong test P-value", "<0.001",
+ "MESA/DHS", "MESA-HF risk score", "C-statistic", "0.78",
+ "MESA/DHS", "MESA-HF risk score", "GND P-value", "0.54",
+ "MESA/DHS", "MESA-HF risk score", "DeLong test P-value", "0.006"
+) %>% 
+ pivot_wider(names_from = c(cohort, colname), values_from = value) %>% 
+ gt(rowname_col = 'model') %>% 
+ tab_spanner_delim(delim = '_') %>% 
+ tab_stubhead("Model") %>% 
+ cols_align('center') %>% 
+ tab_source_note(
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+ )
+
+```
+
+---
+class: middle
+
+Discrimination and calibration of **models** for predicting 10-year risk of developing heart failure in the **external validation cohorts (MESA & DHS) among white adults**
+
+```{r}
+
+# White adults
+
+tribble(
+ ~ model, ~colname, ~value,
+ "oRSF", "C-statistic", "0.82",
+ "oRSF", "GND P-value", "0.27",
+ "oRSF", "DeLong test P-value", "Ref",
+ "ARIC-HF risk score",	"C-statistic", "0.79",
+ "ARIC-HF risk score",	"GND P-value", "0.001",
+ "ARIC-HF risk score",	"DeLong test P-value", "0.008",
+ "PCP-HF risk score", "C-statistic", "0.75",
+ "PCP-HF risk score", "GND P-value", "0.01",
+ "PCP-HF risk score", "DeLong test P-value", "<0.001",
+ "MESA-HF risk score", "C-statistic", "0.80",
+ "MESA-HF risk score", "GND P-value", "0.40",
+ "MESA-HF risk score", "DeLong test P-value", "0.044"
+) %>% 
+ pivot_wider(names_from = c(colname), values_from = value) %>% 
+ gt(rowname_col = 'model') %>% 
+ tab_stubhead("Model") %>% 
+ cols_align('center') %>% 
+ tab_source_note(
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; GND, Greenwood-Nam-D’Agostino; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+ )
+
+
+
+
+```
 
 ---
 
