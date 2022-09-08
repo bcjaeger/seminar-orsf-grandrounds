@@ -1102,7 +1102,7 @@ ggplot(grid, aes(flipper_length_mm, bill_length_mm)) +
 ---
 class: inverse, center, middle
 
-# .huge[Oblique random survival forest (oRSF)]
+# .huge[Oblique random survival forest (obliqueRSF)]
 
 ---
 ## Survival trees 
@@ -1244,15 +1244,13 @@ Discrimination of **learners** for predicting 10-Year risk of developing heart f
 
 tbl_data <- tribble(
  ~model, ~race, ~value,
- "oRSF", "Black adults", "0.88",	
- "oRSF with top 20 variables", "Black adults", "0.88",	
+ "obliqueRSF", "Black adults", "0.88",	
  "Forward stepwise Cox regression", "Black adults", "0.76",	
  "Lasso Cox regression", "Black adults", "0.80",	
  "Ridge Cox regression", "Black adults", "0.81",	
  "Boosted Cox regression", "Black adults", "0.81",	
  "Boosted trees", "Black adults", "0.86",
- "oRSF", "White adults", "0.89",	
- "oRSF with top 20 variables", "White adults", "0.88",	
+ "obliqueRSF", "White adults", "0.89",	
  "Forward stepwise Cox regression", "White adults", "0.77",	
  "Lasso Cox regression", "White adults", "0.78",	
  "Ridge Cox regression", "White adults", "0.78",	
@@ -1264,7 +1262,7 @@ tbl_data <- tribble(
 gt(tbl_data, rowname_col = 'race') %>% 
  tab_stubhead("Race") %>% 
  tab_source_note(
-  "Data presented are C-index values (95% CIs). CIs are the 95% ranges among 1000 bootstrapped replicates. oRSF indicates oblique random survival forest."
+  "Data presented are C-index values (95% CIs). CIs are the 95% ranges among 1000 bootstrapped replicates. obliqueRSF indicates oblique random survival forest."
  ) %>% 
  cols_align('center')
 
@@ -1287,10 +1285,10 @@ Discrimination and calibration of **models** for predicting 10-Year risk of deve
 
 tribble(
  ~cohort, ~model, ~colname, ~value,
- "ARIC", "oRSF",	"C-statistic", "0.80",	
- "ARIC", "oRSF",	"P-difference", "Ref",
- "MESA/DHS", "oRSF",	"C-statistic", "0.83",
- "MESA/DHS", "oRSF",	"P-difference", "Ref",
+ "ARIC", "obliqueRSF",	"C-statistic", "0.80",	
+ "ARIC", "obliqueRSF",	"P-difference", "Ref",
+ "MESA/DHS", "obliqueRSF",	"C-statistic", "0.83",
+ "MESA/DHS", "obliqueRSF",	"P-difference", "Ref",
  "ARIC", "ARIC-HF risk score", "C-statistic",	"0.77",
  "ARIC", "ARIC-HF risk score", "P-difference",	"<0.001",
  "MESA/DHS", "ARIC-HF risk score", "C-statistic",	"0.80",
@@ -1310,7 +1308,7 @@ tribble(
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the obliqueRSF model.")
  )
 
 ```
@@ -1330,8 +1328,8 @@ Discrimination and calibration of **models** for predicting 10-year risk of deve
 
 tribble(
  ~ model, ~colname, ~value,
- "oRSF", "C-statistic", "0.82",
- "oRSF", "P-difference", "Ref",
+ "obliqueRSF", "C-statistic", "0.82",
+ "obliqueRSF", "P-difference", "Ref",
  "ARIC-HF risk score",	"C-statistic", "0.79",
  "ARIC-HF risk score",	"P-difference", "0.008",
  "PCP-HF risk score", "C-statistic", "0.75",
@@ -1344,7 +1342,7 @@ tribble(
  tab_stubhead("Model") %>% 
  cols_align('center') %>% 
  tab_source_note(
-  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the oRSF model.")
+  html("ARIC indicates Atherosclerosis Risk in Communities; DHS, Dallas Heart Study; HF, heart failure; JHS, Jackson Heart Study; MESA, Multi-Ethnic Study of Atherosclerosis; ML, machine learning; PCP-HF, Pooled Cohort Equations-Heart Failure; and Ref, reference.<br/>The DeLong test of C-statistic compared other models with the obliqueRSF model.")
  )
 
 
@@ -1359,7 +1357,7 @@ background-size: 60%
 
 ---
 
-## A web API with our oRSF model
+## sharing our obliqueRSF model
 
 https://cvriskscores.shinyapps.io/HFrisk/
 
@@ -1370,7 +1368,7 @@ knitr::include_url("https://cvriskscores.shinyapps.io/HFrisk/")
 ---
 class: center, middle, inverse
 
-# .huge[Accelerated, interpretable oRSF]
+# .huge[Accelerated, interpretable obliqueRSF]
 
 ```{r}
 
@@ -1730,9 +1728,9 @@ I study `aorsf`<br/> ~~risk prediction using machine learning, generally cardiov
 
 ---
 
-## Accelerated oRSF
+## Accelerated obliqueRSF
 
-I made oRSF faster with:
+I made obliqueRSF faster with:
 
 1. Better code design (see my [JSM talk](https://bcjaeger.github.io/seminar-fastpack/#1))
 
@@ -1742,7 +1740,7 @@ I made oRSF faster with:
 
 ---
 
-## Interpretable oRSF
+## Interpretable obliqueRSF
 
 Few methods for variable importance with oblique random forests
 
