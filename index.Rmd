@@ -1860,9 +1860,7 @@ See my arXiv paper for full details: https://arxiv.org/abs/2208.01129
 
 library(plotly)
 
-bm_vi_smry <- read_rds('data/bm_vi_smry.rds') %>% 
- mutate(model = recode(model,
-                       'rfsrc-permutation' = 'rsf-permute'))
+bm_vi_smry <- read_rds('data/bm_vi_smry.rds')
 
 fig_data <- bm_vi_smry %>%
  group_by(model) %>% 
@@ -1883,7 +1881,7 @@ fig_data <- bm_vi_smry %>%
  ) %>% 
  mutate(
   model = recode(
-   model, 'randomForestSRC-permutation' = 'rfsrc-permutation'
+   model, 'randomForestSRC-permutation' = 'rsf-permutation'
   ),
   model = fct_reorder(model, .x = overall),
   text = table_glue(
